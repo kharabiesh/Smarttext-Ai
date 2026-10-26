@@ -1,7 +1,9 @@
-// Builds USER_MANUAL_AR.pdf from docs/manual/manual.ar.html with headless Chromium.
+// Builds the Arabic PDF guides from docs/manual/*.ar.html with headless Chromium:
+//   manual.ar.html  -> USER_MANUAL_AR.pdf
+//   install.ar.html -> INSTALL_GUIDE_AR.pdf
 // Two passes: the first prints invisible markers to find each section's page, the second
 // prints the final document with those page numbers in the table of contents.
-//   node scripts/manual/build-manual.mjs
+//   node scripts/manual/build-manual.mjs [manual|install]   (default: both)
 import { readFileSync, writeFileSync, mkdtempSync, rmSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { tmpdir } from "node:os";
@@ -11,8 +13,9 @@ import { chromium } from "../pw.mjs";
 
 const root = resolve(import.meta.dirname, "../..");
 const manualDir = join(root, "docs/manual");
-const source = readFileSync(join(manualDir, "manual.ar.html"), "utf8");
-const output = join(root, "USER_MANUAL_AR.pdf");
+const DOCS = { manual: ["manual.ar.html", "USER_MANUAL_AR.pdf"], install: ["install.ar.html", "INSTALL_GUIDE_AR.pdf"] };
+const which = process.argv[2] ? [process.argv[2]] : Object.keys(DOCS);
+if (which.some((w) => !DOCS[w])) throw new Error(`Unknown document. Use one of: ${Object.keys(DOCS).join(", ")}`);
 const work = mkdtempSync(join(tmpdir(), "smarttext-manual-"));
 
 const date = new Intl.DateTimeFormat("ar-u-nu-latn", { month: "long", year: "numeric" }).format(new Date());
@@ -72,18 +75,22 @@ function findPages(pdf, entries) {
   return { pages, count };
 }
 
-const entries = outline(source);
-const base = source.replace("{{DATE}}", date);
 const browser = await chromium.launch();
 try {
-  const pass1 = join(work, "pass1.pdf");
-  await render(withMarkers(base.replace("{{TOC}}", toc(entries)), entries), pass1);
-  const { pages } = findPages(pass1, entries);
-
-  await render(base.replace("{{TOC}}", toc(entries, pages)), output);
-  const count = Number(/Pages:\s+(\d+)/.exec(execFileSync("pdfinfo", [output]).toString())[1]);
-  console.log(`Wrote ${output} (${count} pages)`);
-  for (const e of entries.filter((x) => x.level === 1)) console.log(`  p.${String(pages[e.key]).padStart(2)}  ${e.title}`);
+  for (const name of which) {
+    const [src, out] = DOCS[name];
+    const source = readFileSync(join(manualDir, src), "utf8");
+    const output = join(root, out);
+    const entries = outline(source);
+    const base = source.replace("{{DATE}}", date);
+    const pass1 = join(work, `${name}-pass1.pdf`);
+    await render(withMarkers(base.replace("{{TOC}}", toc(entries)), entries), pass1);
+    const { pages } = findPages(pass1, entries);
+    await render(base.replace("{{TOC}}", toc(entries, pages)), output);
+    const count = Number(/Pages:\s+(\d+)/.exec(execFileSync("pdfinfo", [output]).toString())[1]);
+    console.log(`Wrote ${output} (${count} pages)`);
+    for (const e of entries.filter((x) => x.level === 1)) console.log(`  p.${String(pages[e.key]).padStart(2)}  ${e.title}`);
+  }
 } finally {
   await browser.close();
   rmSync(work, { recursive: true, force: true });

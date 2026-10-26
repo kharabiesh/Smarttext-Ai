@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>دليل تنزيل وتثبيت SmartText AI</title>
+<link rel="stylesheet" href="manual.css">
+<style>
+@page { @top-right { content: "دليل تنزيل وتثبيت SmartText AI"; } }
+.cover { background: linear-gradient(150deg, #1e3a8a 0%, #4f46e5 55%, #7c3aed 100%); }
+.cover h1 { font-size: 29pt; }
+.cover h1 .en { white-space: nowrap; }
+.files td:first-child { font-family: "Mono", monospace; direction: ltr; unicode-bidi: isolate; text-align: right; font-size: 8.6pt; }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="glow g1"></div><div class="glow g2"></div>
+  <img class="logo" src="../../assets/logo.svg" alt="">
+  <div class="kicker">macOS وWindows</div>
+  <h1>دليل تنزيل وتثبيت <span class="en">SmartText AI</span></h1>
+  <div class="sub">خطوات الحصول على ملف التثبيت المناسب لجهازك، وتثبيت التطبيق وتشغيله لأول مرة، وتحديثه وإزالته، وحل مشكلات التثبيت الشائعة.</div>
+  <div class="chips"><span class="chip">macOS 10.15 أو أحدث</span><span class="chip">Apple Silicon وIntel</span><span class="chip">Windows 10 / 11 (64 بت)</span><span class="chip">الإصدار 1.0.0</span></div>
+  <div class="foot">
+    <div><div class="who">تصميم وتطوير</div><div class="name">Ismaiel Almarie</div></div>
+    <div class="ver">{{DATE}}</div>
+  </div>
+</section>
+
+<section class="toc">
+  <h2>جدول المحتويات</h2>
+  <ol>{{TOC}}</ol>
+</section>
+
+<!-- ============ 1 ============ -->
+<section class="chapter" data-ch="1" data-title="قبل البدء">
+<div class="chapter-head"><div class="n">1</div><div class="t"><small>الفصل الأول</small><h2>قبل البدء</h2></div></div>
+<div class="warn"><b>حالة ملفات التثبيت حاليًا</b>إعدادات بناء ملفات التثبيت لنظامي macOS وWindows مكتملة، ومعها سير عمل على GitHub Actions يبنيها على أجهزة macOS وWindows حقيقية. لكن هذه الملفات <strong>لم تُبنَ بعد ولم تُختبر</strong>، لأن التطوير جرى في بيئة Linux، ولا يوجد حتى الآن رابط تنزيل جاهز لها. للحصول عليها اتبع الفصل الخامس «الحصول على ملفات التثبيت»، ثم عُد إلى خطوات التثبيت في الفصلين الثاني والثالث.</div>
+<h3>ما الذي تحتاجه</h3>
+<table><thead><tr><th>المتطلب</th><th>macOS</th><th>Windows</th></tr></thead><tbody>
+<tr><td>إصدار النظام</td><td>10.15 (Catalina) أو أحدث</td><td>Windows 10 الإصدار 1803 أو أحدث، أو Windows 11</td></tr>
+<tr><td>المعالج</td><td>Apple Silicon (M1 وما بعده) أو Intel</td><td>64 بت (x64). أجهزة ARM و32 بت غير مدعومة</td></tr>
+<tr><td>مساحة القرص</td><td>نحو 30 ميغابايت</td><td>نحو 30 ميغابايت، إضافة إلى WebView2 إن لم يكن مثبّتًا</td></tr>
+<tr><td>مكوّنات إضافية</td><td>لا شيء</td><td>Microsoft Edge WebView2 (مدمج في Windows 11، ويُنزَّل تلقائيًا عند الحاجة)</td></tr>
+<tr><td>الإنترنت</td><td colspan="2">لازم لمزوّدي الذكاء الاصطناعي السحابيين، ولتنزيل WebView2 عند الحاجة</td></tr>
+<tr><td>مفتاح API</td><td colspan="2">من OpenAI أو Anthropic، أو خادم محلي مثل Ollama لا يحتاج إلى مفتاح</td></tr>
+</tbody></table>
+<h3>اعرف نوع جهازك</h3>
+<h4>على macOS</h4>
+<ol class="steps">
+<li>افتح قائمة Apple ثم اختر <strong>حول هذا الـ Mac</strong>.</li>
+<li>إذا ظهر سطر <strong>الشريحة</strong> (Chip) باسم مثل Apple M1 أو M2 أو M3 فجهازك Apple Silicon.</li>
+<li>إذا ظهر سطر <strong>المعالج</strong> (Processor) باسم Intel فجهازك Intel.</li>
+</ol>
+<h4>على Windows</h4>
+<ol class="steps">
+<li>افتح <strong>الإعدادات</strong> ← <strong>النظام</strong> ← <strong>حول</strong>.</li>
+<li>انظر إلى <strong>نوع النظام</strong>: يجب أن يكون «نظام تشغيل 64 بت، معالج يستند إلى x64».</li>
+</ol>
+<h3>اختر الملف المناسب</h3>
+<table class="files"><thead><tr><th>اسم الملف</th><th>لمن هو</th></tr></thead><tbody>
+<tr><td>SmartText AI_1.0.0_aarch64.dmg</td><td>أجهزة Mac بمعالجات Apple Silicon</td></tr>
+<tr><td>SmartText AI_1.0.0_x64.dmg</td><td>أجهزة Mac بمعالجات Intel</td></tr>
+<tr><td>SmartText AI_1.0.0_x64-setup.exe</td><td>Windows: المثبّت الموصى به للمستخدم العادي، ويتيح اختيار العربية</td></tr>
+<tr><td>SmartText AI_1.0.0_x64_en-US.msi</td><td>Windows: حزمة MSI للنشر المؤسسي عبر أقسام تقنية المعلومات</td></tr>
+</tbody></table>
+<div class="note"><b>تحقّق من مصدر الملف</b>نزّل ملفات التثبيت فقط من صفحة الإصدارات (Releases) في مستودع المشروع على GitHub، أو من الشخص الذي بناها لك مباشرة. لا تثبّت نسخًا من مواقع تنزيل عامة.</div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="chapter" data-ch="2" data-title="التثبيت على macOS">
+<div class="chapter-head"><div class="n">2</div><div class="t"><small>الفصل الثاني</small><h2>التثبيت على macOS</h2></div></div>
+<h3>خطوات التثبيت</h3>
+<ol class="steps">
+<li>انقر نقرًا مزدوجًا على ملف <code>.dmg</code> المناسب لجهازك، فتُفتح نافذة فيها أيقونة التطبيق ومجلد Applications.</li>
+<li>اسحب أيقونة <strong>SmartText AI</strong> وأفلتها على مجلد <strong>Applications</strong>.</li>
+<li>أغلق النافذة، ثم أخرج القرص الافتراضي من Finder بالنقر على زر الإخراج بجوار اسمه.</li>
+<li>افتح التطبيق من مجلد <strong>التطبيقات</strong> أو من <strong>Launchpad</strong>.</li>
+</ol>
+<h3>إذا منع macOS فتح التطبيق</h3>
+<p>النسخ غير الموقّعة وغير الموثّقة من Apple يمنعها نظام Gatekeeper عند فتحها أول مرة، برسالة مثل «لا يمكن فتح SmartText AI لأنه لا يمكن التحقق من المطوّر». جرّب إحدى الطرق الآتية بالترتيب:</p>
+<ol class="steps">
+<li>في مجلد التطبيقات انقر بزر الفأرة الأيمن (أو Control مع النقر) على التطبيق، واختر <strong>فتح</strong>، ثم <strong>فتح</strong> مرة أخرى في النافذة التي تظهر.</li>
+<li>أو افتح <strong>إعدادات النظام</strong> ← <strong>الخصوصية والأمان</strong>، ومرّر إلى الأسفل، واضغط <strong>فتح على أي حال</strong> بجوار اسم التطبيق.</li>
+<li>إذا ظهرت رسالة «التطبيق تالف ولا يمكن فتحه»، فافتح تطبيق <strong>Terminal</strong> ونفّذ الأمر الآتي، ثم افتح التطبيق من جديد:</li>
+</ol>
+<pre>xattr -dr com.apple.quarantine "/Applications/SmartText AI.app"</pre>
+<p>هذه التحذيرات لا تظهر في النسخ الموقّعة بشهادة Developer ID والموثّقة من Apple.</p>
+<h3>إذن سلسلة المفاتيح</h3>
+<p>عند حفظ مفتاح API لأول مرة قد يسألك macOS عن السماح لـ SmartText AI باستخدام سلسلة المفاتيح. أدخل كلمة مرور جهازك واختر <strong>السماح دائمًا</strong>، حتى لا يتكرر السؤال عند كل طلب.</p>
+<h3>التحديث إلى إصدار أحدث</h3>
+<p>أغلق التطبيق، ثم ثبّت ملف <code>.dmg</code> الجديد بالطريقة نفسها، واختر <strong>استبدال</strong> عندما يسألك Finder. تبقى إعداداتك وسجلك ومفاتيحك كما هي.</p>
+<h3>إزالة التطبيق</h3>
+<ol class="steps">
+<li>اسحب <strong>SmartText AI</strong> من مجلد التطبيقات إلى سلة المهملات.</li>
+<li>لحذف بياناتك المحلية أيضًا (الإعدادات والسجل والمحادثات والصور)، احذف المجلد الآتي من Finder عبر قائمة <strong>انتقال</strong> ← <strong>الانتقال إلى المجلد</strong>:</li>
+</ol>
+<pre>~/Library/Application Support/com.ismaielalmarie.smarttextai</pre>
+<ol class="steps" start="3" style="counter-reset: s 2">
+<li>لحذف مفاتيح API المحفوظة: احذفها من داخل التطبيق قبل إزالته (الإعدادات ← مزوّدو الذكاء الاصطناعي ← إزالة المفتاح)، أو افتح تطبيق <strong>Keychain Access</strong> وابحث عن <code>com.ismaielalmarie.smarttextai</code> واحذف العناصر الظاهرة.</li>
+</ol>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="chapter" data-ch="3" data-title="التثبيت على Windows">
+<div class="chapter-head"><div class="n">3</div><div class="t"><small>الفصل الثالث</small><h2>التثبيت على Windows</h2></div></div>
+<h3>التثبيت بالمثبّت (setup.exe)</h3>
+<ol class="steps">
+<li>انقر نقرًا مزدوجًا على <code>SmartText AI_1.0.0_x64-setup.exe</code>.</li>
+<li>اختر لغة المثبّت: <strong>العربية</strong> أو English.</li>
+<li>اتبع خطوات المعالج واضغط <strong>تثبيت</strong>. يُثبَّت التطبيق للمستخدم الحالي، فلا يحتاج عادةً إلى صلاحيات المسؤول.</li>
+<li>إذا لم يكن WebView2 مثبّتًا، ينزّله المثبّت ويثبّته تلقائيًا؛ لذا تأكد من اتصالك بالإنترنت في هذه الخطوة.</li>
+<li>شغّل التطبيق من قائمة <strong>ابدأ</strong> أو من اختصار سطح المكتب.</li>
+</ol>
+<h3>التثبيت بحزمة MSI</h3>
+<p>حزمة <code>SmartText AI_1.0.0_x64_en-US.msi</code> مخصّصة للنشر في المؤسسات عبر أدوات مثل Group Policy أو Intune. واجهة مثبّتها بالإنجليزية فقط، أما التطبيق نفسه فيدعم العربية كاملة. ويمكن تثبيتها بصمت من سطر الأوامر:</p>
+<pre>msiexec /i "SmartText AI_1.0.0_x64_en-US.msi" /qn</pre>
+<h3>إذا ظهر تحذير SmartScreen</h3>
+<p>قد تظهر رسالة «Windows protected your PC» عند تشغيل مثبّت غير موقّع رقميًا. اضغط <strong>More info</strong> (مزيد من المعلومات)، ثم <strong>Run anyway</strong> (التشغيل على أي حال). التوقيع الرقمي للمثبّت يزيل هذا التحذير تدريجيًا مع بناء السمعة لدى Microsoft.</p>
+<h3>التحديث إلى إصدار أحدث</h3>
+<p>أغلق التطبيق، ثم شغّل مثبّت الإصدار الجديد؛ فيستبدل الإصدار القديم مع الإبقاء على إعداداتك وسجلك ومفاتيحك.</p>
+<h3>إزالة التطبيق</h3>
+<ol class="steps">
+<li>افتح <strong>الإعدادات</strong> ← <strong>التطبيقات</strong> ← <strong>التطبيقات المثبّتة</strong>، وابحث عن SmartText AI، ثم اختر <strong>إلغاء التثبيت</strong>.</li>
+<li>لحذف بياناتك المحلية أيضًا، الصق المسار الآتي في شريط عنوان مستكشف الملفات واحذف المجلد:</li>
+</ol>
+<pre>%APPDATA%\com.ismaielalmarie.smarttextai</pre>
+<ol class="steps" start="3" style="counter-reset: s 2">
+<li>لحذف مفاتيح API: احذفها من داخل التطبيق قبل إزالته، أو افتح <strong>إدارة بيانات الاعتماد</strong> (Credential Manager) ← <strong>بيانات اعتماد Windows</strong>، واحذف العناصر التي تحمل الاسم <code>com.ismaielalmarie.smarttextai</code>.</li>
+</ol>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="chapter" data-ch="4" data-title="التشغيل الأول">
+<div class="chapter-head"><div class="n">4</div><div class="t"><small>الفصل الرابع</small><h2>التشغيل الأول</h2></div></div>
+<h3>تحويل الواجهة إلى العربية</h3>
+<p>تُفتح لوحة التحكم مباشرة بعد التثبيت، والواجهة بالإنجليزية افتراضيًا. افتح <strong>Settings</strong> من الشريط الجانبي، ثم من قسم <strong>General</strong> اختر <strong>العربية</strong> من قائمة <strong>Interface language</strong>، فتنقلب الواجهة إلى العربية من اليمين إلى اليسار فورًا.</p>
+<figure><img src="../screenshots/desktop-first-launch.png"><figcaption><b>شكل 4-1:</b> الشاشة الأولى بعد التثبيت، من نسخة سطح المكتب الفعلية (بناء Linux أُنشئ أثناء التطوير؛ الواجهة نفسها في macOS وWindows).</figcaption></figure>
+<h3>ربط مزوّد الذكاء الاصطناعي</h3>
+<ol class="steps">
+<li>افتح <strong>الإعدادات</strong> ← <strong>مزوّدو الذكاء الاصطناعي</strong>، واختر المزوّد: OpenAI أو Anthropic أو خادم متوافق مع OpenAI.</li>
+<li>الصق مفتاح API في بطاقة المزوّد واضغط <strong>حفظ المفتاح</strong>. يُحفظ المفتاح في سلسلة مفاتيح النظام ولا يُعرض مرة أخرى.</li>
+<li>اضغط <strong>اختبار الاتصال</strong> وتأكد من ظهور رسالة «تم الاتصال».</li>
+<li>اختر النموذج من خانة <strong>نموذج النصوص</strong>، أو اضغط <strong>تحميل النماذج</strong> لجلب القائمة من حسابك.</li>
+</ol>
+<figure><img src="../screenshots/ar-settings-providers.png"><figcaption><b>شكل 4-2:</b> بطاقات المزوّدين ونتيجة اختبار اتصال ناجح (الخادم في هذه اللقطة خادم محاكاة محلي استُخدم أثناء التطوير).</figcaption></figure>
+<p>بعد ذلك تصبح كل الميزات جاهزة. وللتفاصيل الكاملة عن استخدام كل قسم راجع <strong>دليل استخدام SmartText AI</strong>.</p>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="chapter" data-ch="5" data-title="الحصول على ملفات التثبيت">
+<div class="chapter-head"><div class="n">5</div><div class="t"><small>الفصل الخامس</small><h2>الحصول على ملفات التثبيت</h2></div></div>
+<p>لا يمكن بناء ملفات macOS وWindows إلا على أجهزة بهذين النظامين. أسهل طريقة هي GitHub Actions، فهو يبنيها مجانًا على أجهزة Mac وWindows سحابية دون أن تحتاج إلى أي منهما.</p>
+<h3>الطريقة الأولى: GitHub Actions (موصى بها)</h3>
+<ol class="steps">
+<li>أنشئ مستودعًا جديدًا على GitHub وارفع إليه شيفرة المشروع (ملف <code>smarttext-ai-source.zip</code>).</li>
+<li>افتح تبويب <strong>Actions</strong> في المستودع، واختر سير العمل <strong>Release builds</strong>.</li>
+<li>اضغط <strong>Run workflow</strong>، أو ادفع وسمًا مثل <code>v1.0.0</code> إلى المستودع.</li>
+<li>انتظر انتهاء المهام الثلاث: macOS (Apple Silicon)، وmacOS (Intel)، وWindows x64. يستغرق ذلك عادةً بين 15 و30 دقيقة.</li>
+<li>نزّل الملفات من قسم <strong>Artifacts</strong> أسفل صفحة التشغيل، أو من صفحة <strong>Releases</strong> حيث يُنشأ إصدار مسودّة (Draft) بالملفات عند دفع وسم.</li>
+<li>راجع الإصدار المسودّة، ثم اضغط <strong>Publish release</strong> لتحصل على روابط تنزيل دائمة تشاركها مع المستخدمين.</li>
+</ol>
+<div class="note"><b>التوقيع الرقمي (اختياري)</b>بدون توقيع تعمل الملفات، لكنها تُظهر تحذيرات Gatekeeper وSmartScreen الموضّحة في الفصلين الثاني والثالث. لتوقيع نسخ macOS وتوثيقها أضف شهادة Apple Developer ID وبياناتها إلى أسرار المستودع (Secrets) كما يشرح ملف <code>INSTALL_MACOS.md</code>. وتوقيع Windows يحتاج إلى شهادة توقيع برمجيات، والتفاصيل في <code>INSTALL_WINDOWS.md</code>.</div>
+<h3>الطريقة الثانية: البناء على جهازك</h3>
+<h4>على Mac</h4>
+<p>ثبّت أدوات Xcode للأوامر وRust وNode.js 22، ثم نفّذ داخل مجلد المشروع:</p>
+<pre>xcode-select --install
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup target add aarch64-apple-darwin x86_64-apple-darwin
+npm ci
+npm run tauri build -- --target aarch64-apple-darwin     <span class="c"># Apple Silicon</span>
+npm run tauri build -- --target x86_64-apple-darwin      <span class="c"># Intel</span>
+npm run tauri build -- --target universal-apple-darwin   <span class="c"># one app for both</span></pre>
+<p>ستجد ملف <code>.dmg</code> في المجلد <code>src-tauri/target/&lt;target&gt;/release/bundle/dmg/</code>.</p>
+<h4>على Windows</h4>
+<p>ثبّت <strong>Microsoft C++ Build Tools</strong> (حزمة «Desktop development with C++»)، ثم نفّذ في PowerShell:</p>
+<pre>winget install --id Rustlang.Rustup
+rustup default stable-msvc
+winget install OpenJS.NodeJS.LTS
+npm ci
+npm run tauri build</pre>
+<p>ستجد الملفين في <code>src-tauri\target\release\bundle\nsis\</code> و<code>src-tauri\target\release\bundle\msi\</code>.</p>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="chapter" data-ch="6" data-title="حل مشكلات التثبيت">
+<div class="chapter-head"><div class="n">6</div><div class="t"><small>الفصل السادس</small><h2>حل مشكلات التثبيت</h2></div></div>
+<table><thead><tr><th>المشكلة</th><th>السبب المحتمل</th><th>الحل</th></tr></thead><tbody>
+<tr><td>macOS: «لا يمكن التحقق من المطوّر»</td><td>النسخة غير موقّعة أو غير موثّقة</td><td>افتح التطبيق بالنقر الأيمن ثم «فتح»، أو من الخصوصية والأمان ← «فتح على أي حال».</td></tr>
+<tr><td>macOS: «التطبيق تالف ولا يمكن فتحه»</td><td>علامة الحجر على ملف غير موقّع</td><td>نفّذ أمر <code>xattr</code> الوارد في الفصل الثاني.</td></tr>
+<tr><td>macOS: التطبيق لا يعمل أو بطيء جدًا</td><td>نسخة لا تطابق معالج الجهاز</td><td>ثبّت ملف aarch64 لأجهزة Apple Silicon، وملف x64 لأجهزة Intel.</td></tr>
+<tr><td>macOS: يتكرر طلب كلمة المرور عند كل طلب</td><td>اختيار «السماح» بدل «السماح دائمًا»</td><td>اختر «السماح دائمًا» في نافذة سلسلة المفاتيح التالية.</td></tr>
+<tr><td>Windows: «Windows protected your PC»</td><td>المثبّت غير موقّع</td><td>More info ← Run anyway.</td></tr>
+<tr><td>Windows: نافذة بيضاء فارغة</td><td>WebView2 غير مثبّت أو تالف</td><td>نزّل «Microsoft Edge WebView2 Runtime» من موقع Microsoft وثبّته، أو أصلحه من التطبيقات المثبّتة.</td></tr>
+<tr><td>Windows: فشل تنزيل WebView2 أثناء التثبيت</td><td>لا يوجد اتصال بالإنترنت أو يحجبه جدار حماية</td><td>اتصل بالإنترنت وأعد التشغيل، أو ثبّت WebView2 يدويًا أولًا.</td></tr>
+<tr><td>Windows: فشل تثبيت MSI</td><td>سياسات النظام أو صلاحيات غير كافية</td><td>استخدم المثبّت setup.exe، أو شغّل MSI بصلاحيات المسؤول.</td></tr>
+<tr><td>«هذا التطبيق لا يمكن تشغيله على جهازك»</td><td>Windows ‏32 بت أو ARM</td><td>هذه الأنظمة غير مدعومة في الإصدار الحالي.</td></tr>
+<tr><td>«سلسلة مفاتيح النظام غير متاحة» عند حفظ المفتاح</td><td>سلسلة المفاتيح مقفلة أو الوصول إليها مرفوض</td><td>افتح قفلها ووافق على طلب الوصول، ثم أعد حفظ المفتاح.</td></tr>
+<tr><td>فشل سير عمل GitHub Actions</td><td>خطأ في أسرار التوقيع أو إعدادات المستودع</td><td>افتح سجل المهمة الفاشلة. بدون أسرار التوقيع يُبنى التطبيق غير موقّع ولا يفشل.</td></tr>
+</tbody></table>
+</section>
+
+<!-- ============ Checklist ============ -->
+<section class="chapter" data-ch="✓" data-title="قائمة التحقق بعد التثبيت">
+<div class="chapter-head"><div class="n">✓</div><div class="t"><small>ملحق</small><h2>قائمة التحقق بعد التثبيت</h2></div></div>
+<h3>تأكد من الآتي</h3>
+<ul class="checklist">
+<li>اخترت الملف المطابق لنظامي ومعالجي.</li>
+<li>يُفتح التطبيق وتظهر لوحة التحكم.</li>
+<li>حوّلت لغة الواجهة إلى العربية.</li>
+<li>حفظت مفتاح API، أو ربطت خادمًا محليًا مثل Ollama.</li>
+<li>نجح «اختبار الاتصال» واخترت النموذج.</li>
+<li>جرّبت مُحسِّن النصوص على نص قصير وظهرت النتيجة.</li>
+<li>أعرف مكان بياناتي المحلية وكيف أحذفها.</li>
+</ul>
+<div class="credit">
+  <div class="who">تصميم وتطوير</div>
+  <div class="name">Ismaiel Almarie</div>
+  <div style="color:var(--muted);font-size:9.5pt;margin-top:2mm">SmartText AI — الإصدار 1.0.0 — رخصة MIT</div>
+</div>
+</section>
+
+</body>
+</html>
