@@ -1,0 +1,294 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource/ibm-plex-sans-arabic/400.css";
+@import "@fontsource/ibm-plex-sans-arabic/500.css";
+@import "@fontsource/ibm-plex-sans-arabic/600.css";
+@import "@fontsource/ibm-plex-sans-arabic/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --bg: #f6f6f9;
+  --surface: #ffffff;
+  --surface-2: #f1f1f6;
+  --surface-3: #e9e9f1;
+  --border: #e3e3ec;
+  --text: #17171f;
+  --muted: #62627a;
+  --accent: #5b4fe9;
+  --accent-hover: #4c40d9;
+  --accent-fg: #ffffff;
+  --accent-soft: #eeecfe;
+  --danger: #c62828;
+  --danger-soft: #fdecec;
+  --success: #047857;
+  --success-soft: #e6f6ef;
+  --warning: #a15c07;
+  --warning-soft: #fdf3e2;
+  --ring: #7c72ff;
+  --shadow: 0 1px 2px rgb(16 16 32 / 0.04), 0 4px 16px rgb(16 16 32 / 0.05);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0f0f15;
+  --surface: #17171f;
+  --surface-2: #1e1e29;
+  --surface-3: #272734;
+  --border: #2b2b3a;
+  --text: #ececf4;
+  --muted: #9d9db4;
+  --accent: #8b83ff;
+  --accent-hover: #a29cff;
+  --accent-fg: #0f0f15;
+  --accent-soft: #262449;
+  --danger: #f87171;
+  --danger-soft: #3a1d22;
+  --success: #34d399;
+  --success-soft: #133229;
+  --warning: #fbbf24;
+  --warning-soft: #3a2e12;
+  --ring: #a29cff;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.25);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-fg: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --font-sans: "Inter Variable", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --shadow-card: var(--shadow);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+html[lang="ar"] body {
+  font-family: "IBM Plex Sans Arabic", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  font-size: 14.5px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+/* Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-3) transparent;
+}
+
+/* Diff highlighting */
+.diff-added {
+  background: color-mix(in srgb, var(--success) 18%, transparent);
+  color: var(--text);
+  border-radius: 3px;
+  text-decoration: none;
+}
+.diff-removed {
+  background: color-mix(in srgb, var(--danger) 15%, transparent);
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--danger) 60%, transparent);
+  border-radius: 3px;
+}
+
+/* Markdown output (assistant messages, tool results) */
+.md {
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.md > * + * {
+  margin-top: 0.7em;
+}
+.md h1,
+.md h2,
+.md h3 {
+  font-weight: 650;
+  line-height: 1.35;
+}
+.md h1 {
+  font-size: 1.3em;
+}
+.md h2 {
+  font-size: 1.15em;
+}
+.md h3 {
+  font-size: 1.05em;
+}
+.md ul,
+.md ol {
+  padding-inline-start: 1.4em;
+}
+.md ul {
+  list-style: disc;
+}
+.md ol {
+  list-style: decimal;
+}
+.md li + li {
+  margin-top: 0.25em;
+}
+.md a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.md blockquote {
+  border-inline-start: 3px solid var(--border);
+  padding-inline-start: 0.9em;
+  color: var(--muted);
+}
+.md code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--surface-2);
+  padding: 0.1em 0.35em;
+  border-radius: 5px;
+}
+.md pre {
+  direction: ltr;
+  text-align: left;
+}
+.md pre code {
+  display: block;
+  padding: 0.9em 1em;
+  overflow-x: auto;
+  background: transparent;
+  font-size: 0.85em;
+  line-height: 1.6;
+}
+.md table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95em;
+}
+.md th,
+.md td {
+  border: 1px solid var(--border);
+  padding: 0.4em 0.6em;
+  text-align: start;
+}
+.md th {
+  background: var(--surface-2);
+}
+
+/* highlight.js tokens mapped to theme colours */
+.hljs-comment,
+.hljs-quote {
+  color: var(--muted);
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in {
+  color: #8250df;
+}
+[data-theme="dark"] .hljs-keyword,
+[data-theme="dark"] .hljs-selector-tag,
+[data-theme="dark"] .hljs-built_in {
+  color: #c4a7ff;
+}
+.hljs-string,
+.hljs-attr,
+.hljs-template-tag {
+  color: #0a7f4f;
+}
+[data-theme="dark"] .hljs-string,
+[data-theme="dark"] .hljs-attr {
+  color: #7ee2b0;
+}
+.hljs-number,
+.hljs-literal {
+  color: #b35900;
+}
+[data-theme="dark"] .hljs-number,
+[data-theme="dark"] .hljs-literal {
+  color: #ffb86b;
+}
+.hljs-title,
+.hljs-function .hljs-title,
+.hljs-title.function_ {
+  color: #0b62c4;
+}
+[data-theme="dark"] .hljs-title,
+[data-theme="dark"] .hljs-title.function_ {
+  color: #7cc4ff;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-fade-in {
+  animation: fade-in 180ms ease-out;
+}
+@keyframes indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+.progress-indeterminate {
+  animation: indeterminate 1.4s ease-in-out infinite;
+}
+[dir="rtl"] .progress-indeterminate {
+  animation-direction: reverse;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.diff-added,
+.diff-removed {
+  padding: 0 2px;
+}
+.diff-removed + .diff-added,
+.diff-added + .diff-removed {
+  margin-inline-start: 3px;
+}

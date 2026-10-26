@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>دليل استخدام SmartText AI</title>
+<style>
+@font-face { font-family: "Plex Arabic"; font-weight: 400; src: url("../../node_modules/@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-400-normal.woff2") format("woff2"); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
+@font-face { font-family: "Plex Arabic"; font-weight: 600; src: url("../../node_modules/@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-600-normal.woff2") format("woff2"); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
+@font-face { font-family: "Plex Arabic"; font-weight: 700; src: url("../../node_modules/@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-700-normal.woff2") format("woff2"); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
+@font-face { font-family: "Plex Arabic"; font-weight: 400; src: url("../../node_modules/@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2190-21FF; }
+@font-face { font-family: "Plex Arabic"; font-weight: 600; src: url("../../node_modules/@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2190-21FF; }
+@font-face { font-family: "Plex Arabic"; font-weight: 700; src: url("../../node_modules/@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2190-21FF; }
+@font-face { font-family: "Mono"; src: url("../../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2") format("woff2"); }
+
+:root { --accent: #5b4fe9; --accent-2: #7c3aed; --soft: #eeecfe; --muted: #5f5f75; --border: #e3e3ec; --text: #17171f; }
+@page {
+  size: A4;
+  margin: 22mm 18mm 20mm 18mm;
+  @top-right { content: "دليل استخدام SmartText AI"; font-family: "Plex Arabic"; font-size: 8.5pt; color: #8a8aa0; vertical-align: bottom; padding-bottom: 4mm; }
+  @top-left { content: "الإصدار 1.0"; font-family: "Plex Arabic"; font-size: 8.5pt; color: #8a8aa0; vertical-align: bottom; padding-bottom: 4mm; }
+  @bottom-center { content: "صفحة " counter(page) " من " counter(pages); font-family: "Plex Arabic"; font-size: 8.5pt; color: #8a8aa0; padding-top: 4mm; vertical-align: top; }
+  @bottom-right { content: "تصميم وتطوير: Ismaiel Almarie"; font-family: "Plex Arabic"; font-size: 8pt; color: #a0a0b4; vertical-align: top; padding-top: 4mm; }
+}
+@page cover { margin: 0; @top-right { content: none } @top-left { content: none } @bottom-center { content: none } @bottom-right { content: none } }
+
+* { box-sizing: border-box; }
+html { font-family: "Plex Arabic", "Noto Sans Arabic UI", sans-serif; color: var(--text); font-size: 10.6pt; line-height: 1.85; }
+body { margin: 0; }
+h1, h2, h3 { line-height: 1.4; break-after: avoid; break-inside: avoid; }
+p { margin: 0 0 0.75em; text-align: justify; }
+code, pre, .ltr { font-family: "Mono", monospace; direction: ltr; unicode-bidi: isolate; }
+code { font-size: 0.86em; background: #f2f2f7; padding: 0.05em 0.35em; border-radius: 4px; }
+pre { background: #16161f; color: #ececf4; border-radius: 8px; padding: 10px 14px; font-size: 8.6pt; line-height: 1.6; text-align: left; white-space: pre-wrap; break-inside: avoid; margin: 0.4em 0 1em; }
+pre .c { color: #8f8fa8; }
+ul, ol { margin: 0.2em 0 0.9em; padding-inline-start: 1.4em; }
+li { margin-bottom: 0.25em; }
+strong { font-weight: 700; unicode-bidi: plaintext; }
+.marker { position: absolute; font-size: 3px; line-height: 1; color: transparent; white-space: nowrap; direction: ltr; }
+
+/* Cover */
+.cover { page: cover; height: 297mm; position: relative; overflow: hidden; background: linear-gradient(150deg, #4f46e5 0%, #6d3ee8 50%, #8b2fd6 100%); color: #fff; padding: 34mm 24mm; break-after: page; }
+.cover .glow { position: absolute; border-radius: 50%; filter: blur(2px); }
+.cover .g1 { width: 150mm; height: 150mm; left: -50mm; bottom: -40mm; background: radial-gradient(circle, rgba(255,255,255,.18), rgba(255,255,255,0) 70%); }
+.cover .g2 { width: 110mm; height: 110mm; right: -30mm; top: -30mm; background: radial-gradient(circle, rgba(253,230,138,.25), rgba(253,230,138,0) 70%); }
+.cover img.logo { width: 34mm; height: 34mm; filter: drop-shadow(0 6px 18px rgba(0,0,0,.25)); }
+.cover .kicker { margin-top: 26mm; font-size: 13pt; opacity: .85; letter-spacing: .02em; }
+.cover h1 { font-size: 34pt; margin: 3mm 0 0; font-weight: 700; }
+.cover h1 .en { direction: ltr; unicode-bidi: isolate; }
+.cover .sub { font-size: 13.5pt; opacity: .9; margin-top: 6mm; max-width: 135mm; line-height: 1.8; }
+.cover .chips { margin-top: 12mm; display: flex; gap: 3mm; flex-wrap: wrap; }
+.cover .chip { border: 1px solid rgba(255,255,255,.35); border-radius: 99px; padding: 1.5mm 4.5mm; font-size: 10pt; background: rgba(255,255,255,.08); }
+.cover .foot { position: absolute; bottom: 24mm; right: 24mm; left: 24mm; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255,255,255,.3); padding-top: 6mm; }
+.cover .foot .who { font-size: 10pt; opacity: .8; }
+.cover .foot .name { font-size: 15pt; font-weight: 700; direction: ltr; unicode-bidi: isolate; }
+.cover .foot .ver { font-size: 10pt; opacity: .85; text-align: left; }
+
+/* TOC */
+.toc { break-after: page; }
+.toc h2 { font-size: 20pt; color: var(--accent); margin: 0 0 6mm; }
+.toc ol { list-style: none; padding: 0; margin: 0; }
+.toc li { display: flex; align-items: baseline; gap: 3mm; padding: 1.6mm 0; border-bottom: 1px dashed var(--border); font-size: 11.5pt; }
+.toc li .num { color: var(--accent); font-weight: 700; min-width: 16mm; }
+.toc li .fill { flex: 1; }
+.toc li .pg { font-weight: 600; color: var(--muted); direction: ltr; }
+.toc li.sub { font-size: 9.5pt; padding: 0.3mm 0; line-height: 1.6; border-bottom: none; color: var(--muted); padding-inline-start: 19mm; }
+
+/* Chapters */
+.chapter { break-before: page; position: relative; }
+.chapter-head { display: flex; align-items: center; gap: 5mm; padding: 6mm 7mm; border-radius: 10px; background: linear-gradient(135deg, var(--soft), #fff); border: 1px solid var(--border); margin-bottom: 7mm; }
+.chapter-head .n { width: 15mm; height: 15mm; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 18pt; font-weight: 700; flex-shrink: 0; }
+.chapter-head .t small { display: block; color: var(--accent); font-size: 9.5pt; font-weight: 600; }
+.chapter-head h2 { margin: 0; font-size: 19pt; }
+h3 { font-size: 13pt; color: #2b2b75; margin: 1.3em 0 0.4em; }
+h3::before { content: ""; display: inline-block; width: 3px; height: 1em; background: var(--accent); border-radius: 2px; margin-inline-end: 2.5mm; vertical-align: -0.12em; }
+h4 { font-size: 11pt; margin: 1em 0 0.3em; }
+
+figure { margin: 4mm 0 6mm; break-inside: avoid; }
+figure img { width: 100%; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 2px 10px rgba(20,20,40,.08); display: block; }
+figcaption { font-size: 8.8pt; color: var(--muted); margin-top: 2mm; line-height: 1.6; }
+figcaption b { color: var(--accent); }
+
+.note, .warn, .ok { border-radius: 8px; padding: 3mm 4.5mm; margin: 3mm 0 5mm; font-size: 9.8pt; break-inside: avoid; }
+.note { background: #f0efff; border-inline-start: 4px solid var(--accent); }
+.warn { background: #fdf3e2; border-inline-start: 4px solid #c27803; }
+.ok { background: #e7f6ef; border-inline-start: 4px solid #047857; }
+.note b:first-child, .warn b:first-child, .ok b:first-child { display: block; margin-bottom: 1mm; }
+
+table { width: 100%; border-collapse: collapse; margin: 3mm 0 6mm; font-size: 9.4pt; break-inside: auto; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+th { background: #2b2b75; color: #fff; font-weight: 600; text-align: right; padding: 2mm 3mm; }
+td { border-bottom: 1px solid var(--border); padding: 2mm 3mm; vertical-align: top; line-height: 1.65; }
+tr:nth-child(even) td { background: #fafaff; }
+.steps { counter-reset: s; list-style: none; padding: 0; }
+.steps > li { counter-increment: s; position: relative; padding-inline-start: 10mm; margin-bottom: 2.2mm; }
+.steps > li::before { content: counter(s); position: absolute; right: 0; top: 0.5mm; width: 6.5mm; height: 6.5mm; border-radius: 50%; background: var(--accent); color: #fff; font-size: 8.5pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.kbd { font-family: "Mono", monospace; border: 1px solid #ccc; border-bottom-width: 2px; border-radius: 4px; padding: 0 1.5mm; font-size: 8.5pt; direction: ltr; unicode-bidi: isolate; }
+.status-yes { color: #047857; font-weight: 600; }
+.status-no { color: #b42318; font-weight: 600; }
+.status-part { color: #a15c07; font-weight: 600; }
+.credit { text-align: center; margin-top: 10mm; padding: 8mm; border-radius: 12px; border: 1px solid var(--border); background: linear-gradient(135deg, var(--soft), #fff); }
+.credit .who { color: var(--accent); font-size: 10pt; font-weight: 600; }
+.credit .name { font-size: 20pt; font-weight: 700; direction: ltr; unicode-bidi: isolate; }
+.checklist li { list-style: none; position: relative; padding-inline-start: 7mm; }
+.checklist li::before { content: "☐"; position: absolute; right: 0; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div class="glow g1"></div><div class="glow g2"></div>
+  <img class="logo" src="../../assets/logo.svg" alt="">
+  <div class="kicker">الدليل الرسمي للمستخدم</div>
+  <h1>دليل استخدام <span class="en">SmartText AI</span></h1>
+  <div class="sub">تطبيق مكتبي ثنائي اللغة للكتابة بمساعدة الذكاء الاصطناعي: تحسين النصوص وإعادة صياغتها، والمحادثة الذكية، وأدوات الكتابة، وتوليد الصور، وتحليل تشابه النصوص.</div>
+  <div class="chips"><span class="chip">macOS</span><span class="chip">Windows 10 / 11</span><span class="chip">العربية والإنجليزية</span><span class="chip">الإصدار 1.0.0</span></div>
+  <div class="foot">
+    <div><div class="who">تصميم وتطوير</div><div class="name">Ismaiel Almarie</div></div>
+    <div class="ver">{{DATE}}</div>
+  </div>
+</section>
+
+<!-- ============ TOC ============ -->
+<section class="toc">
+  <h2>جدول المحتويات</h2>
+  <ol>{{TOC}}</ol>
+</section>
+
+<!-- ============ 1 ============ -->
+<section class="chapter" data-ch="1" data-title="مقدمة">
+<div class="chapter-head"><div class="n">1</div><div class="t"><small>الفصل الأول</small><h2>مقدمة</h2></div></div>
+<h3>ما هو SmartText AI؟</h3>
+
+<p><strong>SmartText AI</strong> تطبيق مكتبي احترافي يجمع في واجهة واحدة أدوات الكتابة المعتمدة على الذكاء الاصطناعي: تحسين النصوص وإعادة صياغتها بأسلوب طبيعي، ومساعد محادثة ذكي، واثنتي عشرة أداة كتابة متخصصة، وتوليد الصور من الأوصاف النصية، وفحص التشابه بين المستندات محليًا. يعمل التطبيق باللغتين العربية والإنجليزية، مع دعم كامل للكتابة من اليمين إلى اليسار.</p>
+<p>لا يحتوي التطبيق على نموذج ذكاء اصطناعي مدمج؛ بل يتصل بمزوّد تختاره أنت (OpenAI أو Anthropic أو أي خادم متوافق مع OpenAI مثل Ollama على جهازك)، باستخدام مفتاحك الخاص، فتبقى متحكمًا في الجهة التي تُرسل إليها نصوصك وفي التكلفة.</p>
+<div class="note"><b>عن لقطات الشاشة في هذا الدليل</b>
+  جميع اللقطات مأخوذة من واجهة SmartText AI الفعلية، وقد التُقطت آليًا عبر سكربت <code>scripts/manual/capture-screenshots.mjs</code> أثناء تشغيل الواجهة في وضع التطوير. ولعدم توفر مفاتيح API حقيقية أثناء إعداد الدليل، جاءت الردود النصية الظاهرة في بعض اللقطات من <strong>خادم محاكاة محلي (mock)</strong> يُعيد نصوصًا ثابتة مُعدّة مسبقًا، وقد نُبّه على ذلك في تعليق كل لقطة. أما شاشة توليد الصور فتظهر في حالتها الحقيقية عند عدم تهيئة مزوّد.</div>
+<figure><img src="../screenshots/ar-dashboard.png"><figcaption><b>شكل 1-1:</b> لوحة التحكم: بطاقات الوصول السريع، والأدوات المستخدمة مؤخرًا، والأعمال الحديثة، وحالة الخدمات (المزوّد المعروض هنا هو خادم المحاكاة المحلي).</figcaption></figure>
+<h3>لمن هذا التطبيق؟</h3>
+<ul>
+<li>الطلاب والباحثون الذين يحتاجون إلى تحسين صياغة النصوص الأكاديمية وتلخيص المراجع.</li>
+<li>الموظفون والمديرون الذين يكتبون رسائل بريد وتقارير احترافية بسرعة.</li>
+<li>كتّاب المحتوى والمسوّقون الذين يحتاجون إلى عناوين وأفكار ونصوص بنبرات مختلفة.</li>
+<li>المترجمون ومن يعملون بين العربية والإنجليزية.</li>
+<li>المطورون الذين يريدون قاعدة برمجية منظمة قابلة للتوسعة.</li>
+</ul>
+<h3>القدرات الرئيسية</h3>
+<table><thead><tr><th>القسم</th><th>ما يقدّمه</th></tr></thead><tbody>
+<tr><td>مُحسِّن النصوص</td><td>إعادة صياغة طبيعية بخمسة أساليب وثلاث درجات تحويل، مع عرض متجاور وإبراز للتغييرات، وتراجع وإعادة، ونسخ وتنزيل، وعدّاد للكلمات والأحرف.</td></tr>
+<tr><td>المحادثة الذكية</td><td>محادثات محفوظة محليًا، وإعادة تسمية وحذف، ونسخ الردود وإعادة توليدها، وعرض Markdown والشيفرات البرمجية.</td></tr>
+<tr><td>أدوات الكتابة</td><td>إعادة الصياغة، التلخيص، التدقيق النحوي والإملائي، الترجمة، ضبط النبرة، البريد الاحترافي، التوسيع، الاختصار، العناوين، الأفكار، استخراج النقاط.</td></tr>
+<tr><td>توليد الصور</td><td>وصف ونسبة أبعاد وجودة وأنماط جاهزة، مع معاينة وحفظ وسجل محلي (يتطلب مفتاح OpenAI).</td></tr>
+<tr><td>تحليل النصوص</td><td>فحص تشابه محلي بين مستندين، مع توضيح أن كشف النصوص المولّدة آليًا غير مدمج في هذا الإصدار.</td></tr>
+<tr><td>السجل والإعدادات</td><td>سجل محلي قابل للبحث والحذف، واللغة والسمة، ومزوّدو الذكاء الاصطناعي، والخصوصية.</td></tr>
+</tbody></table>
+<h3>متطلبات النظام</h3>
+<table><thead><tr><th>النظام</th><th>الحد الأدنى</th><th>ملاحظات</th></tr></thead><tbody>
+<tr><td>macOS</td><td>الإصدار 10.15 أو أحدث</td><td>معالجات Apple Silicon (arm64) وIntel (x86_64)، بحزمة منفصلة لكل منهما أو حزمة شاملة.</td></tr>
+<tr><td>Windows</td><td>Windows 10 (1803+) أو Windows 11، 64 بت</td><td>يتطلب Microsoft Edge WebView2، وهو مدمج في Windows 11 ويُنزَّل تلقائيًا عند الحاجة.</td></tr>
+<tr><td>الشبكة</td><td>اتصال بالإنترنت</td><td>لازم للمزوّدين السحابيين. فحص التشابه يعمل دون اتصال، وكذلك المزوّد المحلي (Ollama).</td></tr>
+<tr><td>الحساب</td><td>مفتاح API لدى مزوّد</td><td>تُحتسب رسوم الاستخدام من حسابك لدى المزوّد.</td></tr>
+</tbody></table>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="chapter" data-ch="2" data-title="التثبيت">
+<div class="chapter-head"><div class="n">2</div><div class="t"><small>الفصل الثاني</small><h2>التثبيت</h2></div></div>
+<div class="warn"><b>حالة حزم التثبيت في هذا الإصدار</b>إعدادات بناء حزم macOS (<code>.dmg</code>) وWindows (<code>.msi</code> و<code>-setup.exe</code>) مكتملة، ويوجد سير عمل GitHub Actions يبنيها على أجهزة macOS وWindows حقيقية. غير أن هذا الدليل أُعدّ في بيئة Linux، فلم تُبنَ حزم macOS وWindows ولم تُختبر بعد؛ وما ورد أدناه هو خطوات التثبيت المعتادة لهذه الحزم عند بنائها.</div>
+<h3>التثبيت على macOS</h3>
+<ol class="steps">
+<li>نزّل الملف المناسب لجهازك: <code>SmartText AI_1.0.0_aarch64.dmg</code> لأجهزة Apple Silicon (M1 وما بعدها)، أو <code>SmartText AI_1.0.0_x64.dmg</code> لأجهزة Intel.</li>
+<li>افتح الملف واسحب أيقونة <strong>SmartText AI</strong> إلى مجلد <strong>Applications</strong>.</li>
+<li>شغّل التطبيق من مجلد التطبيقات أو من Launchpad.</li>
+</ol>
+<h4>تحذيرات الأمان في macOS</h4>
+<p>إذا لم تكن النسخة موقّعة وموثّقة (Notarized) من Apple، فسيمنع نظام Gatekeeper تشغيلها برسالة «لا يمكن فتح التطبيق لأنه من مطوّر غير معروف». لفتحه: انقر بزر الفأرة الأيمن على التطبيق ثم اختر <strong>فتح</strong>، أو اذهب إلى إعدادات النظام ← الخصوصية والأمان ← <strong>فتح على أي حال</strong>. ويمكن أيضًا تنفيذ الأمر:</p>
+<pre>xattr -dr com.apple.quarantine "/Applications/SmartText AI.app"</pre>
+<p>النسخ الموقّعة بشهادة <strong>Developer ID</strong> والموثّقة من Apple تُفتح دون أي تحذير. وعند حفظ مفتاح API لأول مرة قد يطلب macOS السماح بالوصول إلى سلسلة المفاتيح، فاختر <strong>السماح دائمًا</strong>.</p>
+<h3>التثبيت على Windows</h3>
+<ol class="steps">
+<li>شغّل مثبّت <code>SmartText AI_1.0.0_x64-setup.exe</code> (يتيح اختيار العربية أو الإنجليزية)، أو حزمة <code>SmartText AI_1.0.0_x64_en-US.msi</code> المناسبة للنشر المؤسسي.</li>
+<li>اتبع خطوات المعالج حتى النهاية.</li>
+<li>شغّل التطبيق من قائمة ابدأ.</li>
+</ol>
+<h4>تحذير SmartScreen</h4>
+<p>قد تظهر رسالة «Windows protected your PC» إذا لم يكن المثبّت موقّعًا بشهادة توقيع برمجيات. انقر <strong>More info</strong> ثم <strong>Run anyway</strong>. التوقيع الرقمي للمثبّت يزيل هذا التحذير تدريجيًا مع بناء السمعة.</p>
+<h3>التشغيل الأول</h3>
+<p>تُفتح لوحة التحكم مباشرة، وتظهر رسالة تدعوك إلى ربط مزوّد ذكاء اصطناعي. تكون الواجهة بالإنجليزية افتراضيًا؛ ولتحويلها إلى العربية افتح <strong>Settings</strong> ← <strong>General</strong> ← <strong>Interface language</strong> واختر <strong>العربية</strong>، فينقلب اتجاه الواجهة كلها إلى اليمين فورًا.</p>
+<figure><img src="../screenshots/desktop-first-launch.png"><figcaption><b>شكل 2-1:</b> التشغيل الأول لنسخة سطح المكتب الفعلية (لقطة من بناء Linux أُنشئ واختُبر أثناء التطوير؛ الواجهة نفسها في macOS وWindows).</figcaption></figure>
+<h3>حل مشكلات التثبيت الشائعة</h3>
+<table><thead><tr><th>المشكلة</th><th>الحل</th></tr></thead><tbody>
+<tr><td>macOS: «التطبيق تالف ولا يمكن فتحه»</td><td>الملف عليه علامة الحجر لأنه غير موقّع: نفّذ أمر <code>xattr</code> المذكور أعلاه.</td></tr>
+<tr><td>macOS: التطبيق لا يعمل على جهازي</td><td>تأكد من اختيار الحزمة المطابقة لمعالجك (aarch64 أو x64) أو استخدم الحزمة الشاملة.</td></tr>
+<tr><td>Windows: نافذة فارغة بيضاء</td><td>ثبّت أو أصلح Microsoft Edge WebView2 Runtime.</td></tr>
+<tr><td>Windows: فشل تثبيت MSI</td><td>استخدم مثبّت <code>-setup.exe</code> بدلًا منه، أو شغّل MSI بصلاحيات المسؤول.</td></tr>
+<tr><td>«النظام غير مدعوم»</td><td>الإصدار يدعم Windows ‏64 بت فقط وmacOS ‏10.15 فأحدث.</td></tr>
+</tbody></table>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="chapter" data-ch="3" data-title="الإعداد الأولي">
+<div class="chapter-head"><div class="n">3</div><div class="t"><small>الفصل الثالث</small><h2>الإعداد الأولي</h2></div></div>
+<h3>اختيار مزوّد الذكاء الاصطناعي</h3>
+<p>افتح <strong>الإعدادات</strong> ← <strong>مزوّدو الذكاء الاصطناعي</strong>، ثم اختر من قائمة <strong>مزوّد ميزات النصوص</strong> أحد الخيارات الآتية:</p>
+<table><thead><tr><th>المزوّد</th><th>العنوان الذي تُرسل إليه النصوص</th><th>متى تختاره</th></tr></thead><tbody>
+<tr><td>OpenAI</td><td class="ltr">api.openai.com</td><td>للنصوص ولتوليد الصور معًا بمفتاح واحد.</td></tr>
+<tr><td>Anthropic (Claude)</td><td class="ltr">api.anthropic.com</td><td>لنماذج Claude في الكتابة والمحادثة.</td></tr>
+<tr><td>خادم متوافق مع OpenAI</td><td>العنوان الذي تحدده</td><td>لتشغيل نموذج محلي (Ollama أو LM Studio) دون إرسال النص خارج جهازك، أو لخدمات مثل OpenRouter.</td></tr>
+</tbody></table>
+<figure><img src="../screenshots/ar-settings.png"><figcaption><b>شكل 3-1:</b> شاشة الإعدادات: اللغة والسمة، واختيار المزوّد والنموذج.</figcaption></figure>
+<h3>إضافة مفتاح API بأمان</h3>
+<ol class="steps">
+<li>أنشئ مفتاحًا من لوحة حسابك لدى المزوّد (مثلًا صفحة API Keys في OpenAI أو Anthropic Console).</li>
+<li>الصق المفتاح في خانة <strong>مفتاح API</strong> ضمن بطاقة المزوّد، ثم اضغط <strong>حفظ المفتاح</strong>.</li>
+<li>تظهر شارة خضراء «يوجد مفتاح محفوظ في سلسلة مفاتيح النظام»، وتُفرَّغ الخانة.</li>
+</ol>
+<div class="ok"><b>كيف يُحمى مفتاحك؟</b>يُحفظ المفتاح في Keychain على macOS أو مدير بيانات الاعتماد (Credential Manager) في Windows، ولا يُخزَّن في ملفات التطبيق. لا يعرض التطبيق المفتاح مرة أخرى أبدًا، ولا تصل إليه واجهة التطبيق بعد حفظه؛ إذ يضيفه الجزء الأصلي (Rust) إلى الطلب مباشرة عند الاتصال بالمزوّد. لاستبداله اضغط <strong>استبدال المفتاح</strong>، ولحذفه اضغط <strong>إزالة المفتاح</strong>.</div>
+<h3>اختيار النموذج</h3>
+<p>في خانة <strong>نموذج النصوص</strong> يمكنك اختيار أحد المقترحات، أو كتابة معرّف أي نموذج يدعمه مزوّدك، أو الضغط على <strong>تحميل النماذج</strong> لجلب القائمة الفعلية المتاحة لحسابك من المزوّد. يُحفظ اختيار النموذج لكل مزوّد على حدة.</p>
+<h3>اختبار الاتصال</h3>
+<p>اضغط <strong>اختبار الاتصال</strong> في بطاقة المزوّد؛ فيطلب التطبيق قائمة النماذج من المزوّد، وتظهر رسالة «تم الاتصال» مع عدد النماذج المتاحة، أو رسالة خطأ واضحة تشرح السبب (مفتاح غير صالح، تعذّر الاتصال، عنوان غير مسموح…).</p>
+<figure><img src="../screenshots/ar-settings-providers.png"><figcaption><b>شكل 3-2:</b> بطاقات المزوّدين ونتيجة اختبار اتصال ناجح بالخادم المتوافق (الخادم هنا خادم المحاكاة المحلي، ويعيد نموذجين وهميين). في وضع التطوير عبر المتصفح تُقرأ المفاتيح من ملف ‎.env، لذا لا تظهر خانة إدخال المفتاح في هذه اللقطة؛ أما في نسخة سطح المكتب فتظهر خانة المفتاح وزرّا الحفظ والإزالة.</figcaption></figure>
+<h3>إعداد خادم محلي (اختياري)</h3>
+<p>لاستخدام نموذج على جهازك دون إنترنت ودون تكلفة، ثبّت Ollama ثم نزّل نموذجًا، واختر في التطبيق «خادم متوافق مع OpenAI» بالعنوان الافتراضي:</p>
+<pre>ollama pull llama3.1
+<span class="c"># Server URL in SmartText:</span>
+http://localhost:11434/v1</pre>
+<p>يُسمح بعناوين <code>http://</code> للخوادم المحلية (localhost) فقط؛ أما الخوادم البعيدة فيجب أن تستخدم <code>https://</code> حمايةً لبياناتك.</p>
+<h3>حدود الاستخدام والتكلفة</h3>
+<ul>
+<li>يُحتسب كل طلب على حسابك لدى المزوّد وفق أسعاره المنشورة؛ ولا يفرض SmartText أي رسوم إضافية.</li>
+<li>يعرض التطبيق عدد الرموز (Tokens) المُدخلة والمُخرجة عندما يوفّرها المزوّد، لكنه لا يقدّر الأسعار لأنها تتغير وتختلف بين النماذج.</li>
+<li>عند تجاوز حد الطلبات يعيد التطبيق المحاولة تلقائيًا (حتى العدد المحدد في الإعدادات ← الشبكة)، ثم يعرض رسالة توضيحية.</li>
+</ul>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="chapter" data-ch="4" data-title="استخدام مُحسِّن النصوص">
+<div class="chapter-head"><div class="n">4</div><div class="t"><small>الفصل الرابع</small><h2>استخدام مُحسِّن النصوص</h2></div></div>
+<h3>إدخال النص</h3>
+<p>افتح <strong>مُحسِّن النصوص</strong> من الشريط الجانبي (أو اضغط <span class="kbd">Ctrl+2</span> / <span class="kbd">⌘2</span>). الصق نصك في لوحة <strong>النص الأصلي</strong> أو اكتبه، أو استخدم زر <strong>إدراج نص مثال</strong> للتجربة. يظهر أسفل اللوحة عدد الكلمات والأحرف، ويُضبط اتجاه الكتابة تلقائيًا حسب لغة النص.</p>
+<h3>اختيار الأسلوب</h3>
+<table><thead><tr><th>الأسلوب</th><th>الاستخدام المناسب</th></tr></thead><tbody>
+<tr><td>مهني</td><td>رسائل العمل والتقارير والعروض.</td></tr>
+<tr><td>أكاديمي</td><td>الأبحاث والمقالات العلمية، بلغة رسمية دقيقة.</td></tr>
+<tr><td>حواري</td><td>منشورات التواصل والرسائل الودية.</td></tr>
+<tr><td>موجز</td><td>إزالة الحشو وقول كل فكرة مرة واحدة.</td></tr>
+<tr><td>إبداعي</td><td>نصوص تسويقية وسردية بإيقاع متنوع مع الحفاظ على المضمون.</td></tr>
+</tbody></table>
+<h3>اختيار درجة التحويل</h3>
+<ul>
+<li><strong>خفيفة:</strong> تصحيح الأخطاء والعبارات الركيكة مع إبقاء معظم الجمل.</li>
+<li><strong>متوازنة:</strong> إعادة الصياغة لتحسين الانسياب وسهولة القراءة.</li>
+<li><strong>قوية:</strong> إعادة بناء الجمل والفقرات بحرية مع الحفاظ على كل معلومة.</li>
+</ul>
+<p>ويمكنك أيضًا تحديد <strong>لغة الناتج</strong> (مثل لغة الإدخال، أو العربية، أو الإنجليزية)، وتفعيل <strong>تصحيح القواعد والإملاء</strong> و<strong>تقليل التكرار</strong>.</p>
+<h3>توليد النسخة المحسّنة</h3>
+<p>اضغط <strong>حسِّن النص</strong>. يظهر بجوار الزر اسم الجهة التي سيُرسل إليها النص والنموذج المستخدم، فتعرف دائمًا أين تذهب بياناتك. وعند الانتهاء تظهر النسخة المحسّنة في لوحة <strong>النص المُحسَّن</strong>، وهي قابلة للتحرير مباشرة.</p>
+<figure><img src="../screenshots/ar-humanizer.png"><figcaption><b>شكل 4-1:</b> العرض المتجاور للنص الأصلي والنسخة المحسّنة (النص المحسّن هنا رد ثابت من خادم المحاكاة المحلي، وليس من نموذج حقيقي).</figcaption></figure>
+<h3>مقارنة النص الأصلي بالمحسّن</h3>
+<p>اختر <strong>إبراز التغييرات</strong> أعلى لوحة النتيجة لعرض الفروق كلمةً بكلمة: الكلمات المحذوفة بلون أحمر مشطوب، والمضافة بخلفية خضراء. ويعرض شريط الحالة عدد الكلمات المضافة والمحذوفة ونسبة ما تغيّر من الأصل.</p>
+<figure><img src="../screenshots/ar-humanizer-diff.png"><figcaption><b>شكل 4-2:</b> عرض «إبراز التغييرات» مع ملخص الفروق (الناتج من خادم المحاكاة المحلي).</figcaption></figure>
+<figure><img src="../screenshots/desktop-humanizer.png"><figcaption><b>شكل 4-3:</b> المُحسِّن داخل نافذة نسخة سطح المكتب الفعلية (بناء Linux)، حيث مرّ الطلب عبر الطبقة الأصلية (Rust) إلى خادم المحاكاة المحلي؛ النص الناتج ثابت مُعدّ مسبقًا وليس من نموذج حقيقي.</figcaption></figure>
+<h3>النسخ والتصدير والتراجع</h3>
+<ul>
+<li><strong>نسخ:</strong> ينسخ النص المحسّن إلى الحافظة.</li>
+<li><strong>تنزيل:</strong> يحفظ النص في ملف <code>.txt</code> أو <code>.md</code> في المكان الذي تختاره.</li>
+<li><strong>تراجع / إعادة:</strong> تنقّل بين النسخ المولّدة وتعديلاتك اليدوية.</li>
+<li>تُحفظ كل نتيجة في <strong>السجل</strong> تلقائيًا ما دام السجل المحلي مفعّلًا.</li>
+</ul>
+<h3>الحفاظ على المعنى الأصلي</h3>
+<p>صُممت تعليمات المُحسِّن لتحافظ على المعنى وعلى كل رقم وتاريخ واسم واقتباس ومصطلح تقني، ولتمنع إضافة معلومات غير موجودة في الأصل. ومع ذلك راجع النتيجة دائمًا، خصوصًا في النصوص القانونية والطبية والأكاديمية.</p>
+<div class="warn"><b>تنبيه مهم</b>الهدف من المُحسِّن هو تحسين الوضوح والأسلوب بشفافية. لا يَعِد SmartText بتجاوز أدوات كشف النصوص المولّدة آليًا ولا بالحصول على أي نتيجة معينة فيها، وعليك الالتزام بسياسات مؤسستك التعليمية أو المهنية بشأن استخدام الذكاء الاصطناعي.</div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="chapter" data-ch="5" data-title="استخدام المحادثة الذكية">
+<div class="chapter-head"><div class="n">5</div><div class="t"><small>الفصل الخامس</small><h2>استخدام المحادثة الذكية</h2></div></div>
+<h3>بدء محادثة</h3>
+<p>افتح <strong>المحادثة الذكية</strong> واكتب رسالتك في الخانة السفلية، ثم اضغط <span class="kbd">Enter</span> للإرسال (أو <span class="kbd">Shift+Enter</span> لسطر جديد). يرد المساعد بلغة سؤالك، ويعرض القوائم والجداول والشيفرات البرمجية بتنسيق واضح. ولبدء موضوع جديد اضغط <strong>محادثة جديدة</strong>.</p>
+<figure><img src="../screenshots/ar-chat.png"><figcaption><b>شكل 5-1:</b> محادثة عربية مع قائمة المحادثات، وأزرار النسخ وإعادة التوليد (الرد من خادم المحاكاة المحلي).</figcaption></figure>
+<h3>إدارة السجل</h3>
+<ul>
+<li>تُحفظ المحادثات على جهازك فقط، وتظهر في القائمة الجانبية مرتبةً من الأحدث، ويُسمّى كل منها تلقائيًا من أول رسالة.</li>
+<li>مرّر المؤشر فوق محادثة لإظهار زرّي <strong>إعادة تسمية</strong> و<strong>حذف</strong>.</li>
+<li>لإيقاف حفظ المحادثات: الإعدادات ← الخصوصية والبيانات ← «حفظ المحادثات محليًا».</li>
+</ul>
+<h3>نسخ الإجابات وإعادة توليدها</h3>
+<p>أسفل كل رد زر <strong>نسخ</strong>، وأسفل آخر رد زر <strong>إعادة التوليد</strong> لطلب إجابة بديلة للسؤال نفسه. وللشيفرات البرمجية زر <strong>نسخ الشيفرة</strong> خاص بها. لا يُنفَّذ أي محتوى يولّده الذكاء الاصطناعي تلقائيًا، ولا تُفتح الروابط أو تُحمَّل الصور الواردة في الردود.</p>
+<h3>تبديل النماذج</h3>
+<p>يظهر في أعلى شاشة المحادثة المزوّد والنموذج الحاليان. لتغيير النموذج اذهب إلى الإعدادات ← مزوّدو الذكاء الاصطناعي، واختر نموذجًا آخر أو مزوّدًا آخر؛ ويُطبَّق التغيير على الرسالة التالية مباشرة، ويُكتب اسم النموذج أسفل كل رد.</p>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="chapter" data-ch="6" data-title="أدوات الكتابة">
+<div class="chapter-head"><div class="n">6</div><div class="t"><small>الفصل السادس</small><h2>أدوات الكتابة</h2></div></div>
+<p>تضم شاشة <strong>أدوات الكتابة</strong> اثنتي عشرة أداة. اختر الأداة من القائمة، واضبط إعداداتها في البطاقة العلوية، والصق نصك في لوحة <strong>الإدخال</strong>، ثم اضغط <strong>تشغيل</strong>. تظهر النتيجة في لوحة <strong>النتيجة</strong> مع أزرار النسخ والتنزيل وإرسالها إلى مُحسِّن النصوص.</p>
+<figure><img src="../screenshots/ar-tools.png"><figcaption><b>شكل 6-1:</b> أداة التلخيص بشكل «نقاط» (الناتج من خادم المحاكاة المحلي).</figcaption></figure>
+<table><thead><tr><th>الأداة</th><th>الإعدادات</th><th>الاستخدام</th></tr></thead><tbody>
+<tr><td>إعادة الصياغة</td><td>الأسلوب، لغة الناتج</td><td>قول المعنى نفسه بكلمات وتراكيب مختلفة.</td></tr>
+<tr><td>التلخيص</td><td>الطول، الشكل (فقرة/نقاط)، لغة الناتج</td><td>اختصار النصوص الطويلة في أبرز أفكارها.</td></tr>
+<tr><td>التدقيق النحوي</td><td>عرض قائمة بالتصحيحات</td><td>تصحيح القواعد وعلامات الترقيم دون تغيير الأسلوب.</td></tr>
+<tr><td>التدقيق الإملائي</td><td>—</td><td>تصحيح الإملاء فقط، بما في ذلك الهمزات والتاء المربوطة.</td></tr>
+<tr><td>الترجمة</td><td>اللغة الهدف (8 لغات)</td><td>ترجمة طبيعية مع الحفاظ على التنسيق والأرقام والأسماء.</td></tr>
+<tr><td>ضبط النبرة</td><td>النبرة، لغة الناتج</td><td>تحويل النص إلى نبرة ودّية أو رسمية أو واثقة أو مقنعة…</td></tr>
+<tr><td>رسالة بريد احترافية</td><td>الغرض، النبرة، المستلم</td><td>تحويل ملاحظات مختصرة إلى رسالة كاملة بعنوان وتحية وخاتمة.</td></tr>
+<tr><td>توسيع المحتوى</td><td>مقدار التوسيع</td><td>تطوير فكرة قصيرة دون اختلاق إحصاءات أو اقتباسات.</td></tr>
+<tr><td>اختصار النص</td><td>الطول المستهدف</td><td>تقليل الطول إلى 75% أو 50% أو 25% من الأصل.</td></tr>
+<tr><td>توليد العناوين</td><td>العدد، النمط</td><td>اقتراح عناوين إخبارية أو جذابة أو ملائمة لمحركات البحث.</td></tr>
+<tr><td>توليد الأفكار</td><td>العدد، نوع الأفكار</td><td>عصف ذهني حول موضوع أو مشكلة.</td></tr>
+<tr><td>استخراج النقاط الرئيسية</td><td>الحد الأقصى للنقاط</td><td>تحويل النص إلى قائمة نقطية مركّزة.</td></tr>
+</tbody></table>
+<h3>نصائح للحصول على أفضل النتائج</h3>
+<ul>
+<li>في الترجمة، راجع المصطلحات المتخصصة، واطلب من المحادثة الذكية بدائل لها عند الحاجة.</li>
+<li>في البريد الاحترافي، اكتب الحقائق المهمة (التواريخ، الأرقام، المطلوب) بوضوح في النقاط؛ إذ تضع الأداة عناصر مثل <code>[Your name]</code> مكان المعلومات الناقصة بدل اختلاقها.</li>
+<li>يمكنك إرسال نتيجة أي أداة إلى مُحسِّن النصوص بزر العصا السحرية لتحسينها أكثر.</li>
+</ul>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="chapter" data-ch="7" data-title="توليد الصور">
+<div class="chapter-head"><div class="n">7</div><div class="t"><small>الفصل السابع</small><h2>توليد الصور</h2></div></div>
+<p>يتصل قسم توليد الصور بواجهة <strong>OpenAI Images API</strong> (النموذجان <code>gpt-image-1</code> و<code>dall-e-3</code>). إذا لم يكن مفتاح OpenAI محفوظًا، تظهر شاشة إعداد تشرح خطوات الربط، ولا يعرض التطبيق أي صور تجريبية أو وهمية.</p>
+<figure><img src="../screenshots/ar-image-setup.png"><figcaption><b>شكل 7-1:</b> شاشة إعداد مزوّد الصور كما تظهر فعليًا عند عدم وجود مفتاح. (لم تُلتقط لقطة لصورة مولّدة لعدم توفر مفتاح حقيقي أثناء إعداد الدليل.)</figcaption></figure>
+<h3>كتابة وصف الصورة</h3>
+<p>اكتب في خانة <strong>الوصف</strong> ما تريد رؤيته بوضوح: الموضوع، والمكان، والإضاءة، والألوان، وزاوية التصوير. مثال: «ركن قراءة هادئ بجوار نافذة عند الشروق، نباتات خضراء، إضاءة دافئة، لقطة واسعة». الوصف التفصيلي يعطي نتائج أدق.</p>
+<p>خانة <strong>الوصف السلبي</strong> معطّلة مع OpenAI لأن واجهتها لا تدعم هذه الميزة؛ وبدلًا من ذلك اذكر ما تريد تجنبه داخل الوصف نفسه (مثل: «بدون نصوص مكتوبة»).</p>
+<h3>اختيار نسبة الأبعاد والجودة والنمط</h3>
+<table><thead><tr><th>الخيار</th><th>gpt-image-1</th><th>dall-e-3</th></tr></thead><tbody>
+<tr><td>مربّعة</td><td class="ltr">1024×1024</td><td class="ltr">1024×1024</td></tr>
+<tr><td>أفقية</td><td class="ltr">1536×1024</td><td class="ltr">1792×1024</td></tr>
+<tr><td>عمودية</td><td class="ltr">1024×1536</td><td class="ltr">1024×1792</td></tr>
+<tr><td>الجودة</td><td>تلقائية، منخفضة، متوسطة، عالية</td><td>قياسية، عالية الدقة</td></tr>
+</tbody></table>
+<p>أما <strong>النمط الجاهز</strong> (فوتوغرافي، فن رقمي، ألوان مائية، ثلاثي الأبعاد، رسم خطي، سينمائي، أنمي) فيضيف وصفًا أسلوبيًا قصيرًا إلى الوصف المرسل.</p>
+<h3>التوليد والحفظ</h3>
+<ol class="steps">
+<li>اضغط <strong>ولّد الصورة</strong>؛ يظهر شريط تقدّم وعدّاد للثواني (قد يستغرق التوليد حتى دقيقة).</li>
+<li>تظهر الصورة في لوحة النتيجة، ومعها الوصف كما فسّره المزوّد إن وُجد.</li>
+<li>اضغط <strong>حفظ الصورة</strong> لحفظها بصيغة PNG في المكان الذي تختاره.</li>
+<li>تُحفظ آخر 60 صورة في <strong>سجل التوليد</strong> إذا كان سجل الصور مفعّلًا.</li>
+</ol>
+<h3>حدود المزوّد ورسومه</h3>
+<ul>
+<li>كل صورة تُحتسب على حسابك لدى OpenAI حسب النموذج والجودة والحجم؛ راجع صفحة الأسعار لدى المزوّد.</li>
+<li>قد يرفض المزوّد بعض الأوصاف وفق سياسة المحتوى، فتظهر رسالة «رفض المزوّد هذا الطلب وفق سياسة المحتوى لديه».</li>
+<li>عند فشل الطلب تظهر رسالة الخطأ دون أي صورة بديلة.</li>
+</ul>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="chapter" data-ch="8" data-title="تحليل النصوص">
+<div class="chapter-head"><div class="n">8</div><div class="t"><small>الفصل الثامن</small><h2>تحليل النصوص</h2></div></div>
+<h3>فهم تقرير التشابه</h3>
+<p>الصق نصّين في خانتي <strong>المستند (أ)</strong> و<strong>المستند (ب)</strong> ثم اضغط <strong>قارن المستندين</strong>. تجري المقارنة كلها على جهازك ولا يُرسل أي نص إلى الإنترنت. ويوحّد التطبيق أشكال الهمزات والتاء المربوطة والألف المقصورة ويتجاهل التشكيل عند المقارنة العربية.</p>
+<figure><img src="../screenshots/ar-analysis.png"><figcaption><b>شكل 8-1:</b> تقرير تشابه حقيقي بين مستندين عربيين يشتركان في مقطع طويل (هذا الفحص محلي بالكامل ونتائجه محسوبة فعليًا، لا من خادم المحاكاة).</figcaption></figure>
+<table><thead><tr><th>المؤشر</th><th>معناه</th></tr></thead><tbody>
+<tr><td>تشابه الصياغة</td><td>نسبة المتتاليات الثلاثية من الكلمات المشتركة إلى مجموع المتتاليات في المستندين.</td></tr>
+<tr><td>نسبة (أ) الموجودة في (ب)</td><td>كم من عبارات المستند (أ) تتكرر في (ب). مفيد إذا كان (أ) نصًا يُشتبه في اقتباسه من (ب).</td></tr>
+<tr><td>نسبة (ب) الموجودة في (أ)</td><td>العكس.</td></tr>
+<tr><td>تشابه المفردات</td><td>تقارب الكلمات المستخدمة بغض النظر عن ترتيبها.</td></tr>
+<tr><td>المقاطع المشتركة</td><td>كل تسلسل متطابق من ست كلمات متتالية أو أكثر، مرتّبًا من الأطول.</td></tr>
+</tbody></table>
+<div class="warn"><b>ما لا يفعله هذا الفحص</b>المقارنة تقتصر على المستندين اللذين تقدّمهما، وليست بحثًا عن الانتحال عبر الإنترنت أو في قواعد بيانات الأبحاث. التشابه المرتفع قد يكون له سبب مشروع (اقتباس موثّق، عبارات شائعة، مصدر مشترك)، فتعامل معه بوصفه مؤشرًا للمراجعة البشرية لا دليلًا قاطعًا.</div>
+<h3>نتائج كشف النصوص المولّدة آليًا (اختيارية)</h3>
+<p>لا يتضمن هذا الإصدار مزوّدًا لكشف النصوص المولّدة آليًا، ولذلك يعرض التبويب حالة «غير مربوط» بوضوح دون أي درجات. وقد جُهّزت في الشيفرة واجهة برمجية لربط خدمة كشف ذات واجهة موثّقة مستقبلًا، على أن تُعرض نتائجها كما يقدّمها المزوّد مع ذكر اسمه.</p>
+<figure><img src="../screenshots/ar-detection.png"><figcaption><b>شكل 8-2:</b> تبويب كشف النصوص المولّدة آليًا كما يظهر فعليًا في هذا الإصدار: لا مزوّد مدمج ولا درجات مختلقة.</figcaption></figure>
+<h3>حدود التفسير المسؤول</h3>
+<ul>
+<li>نتائج أي أداة كشف هي تقديرات إحصائية قد تخطئ، خصوصًا مع النصوص القصيرة أو المترجمة أو المكتوبة بلغة ثانية.</li>
+<li>لا يمكن لأي أداة أن تثبت يقينًا من كتب نصًا ما، فلا تُبنَ قرارات تأديبية أو أكاديمية على نتيجتها وحدها.</li>
+</ul>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="chapter" data-ch="9" data-title="الإعدادات والخصوصية">
+<div class="chapter-head"><div class="n">9</div><div class="t"><small>الفصل التاسع</small><h2>الإعدادات والخصوصية</h2></div></div>
+<h3>اللغة والسمة</h3>
+<p>من <strong>الإعدادات ← عام</strong> اختر لغة الواجهة (العربية أو English) والسمة (حسب النظام، فاتحة، داكنة). يتغير الاتجاه والخطوط فورًا، وتُحفظ اختياراتك محليًا.</p>
+<h3>السجل المحلي</h3>
+<p>يحفظ التطبيق نتائج المُحسِّن والأدوات والمحادثات والصور في قاعدة بيانات SQLite على جهازك فقط. ومن شاشة <strong>السجل</strong> يمكنك البحث في النتائج وتصفيتها حسب النوع، وعرض الإدخال والناتج، ونسخهما، وفتح الناتج في المُحسِّن، وحذف أي عنصر.</p>
+<figure><img src="../screenshots/ar-history.png"><figcaption><b>شكل 9-1:</b> شاشة السجل مع نتائج محفوظة محليًا (النتائج المعروضة جاءت من خادم المحاكاة المحلي).</figcaption></figure>
+<h3>مسح البيانات المخزنة</h3>
+<p>من <strong>الإعدادات ← الخصوصية والبيانات</strong> يمكنك إيقاف حفظ كل نوع من البيانات على حدة، ومسح سجل النصوص، أو حذف المحادثات، أو حذف الصور، أو <strong>محو كل البيانات المحلية</strong>. ولا تُحذف مفاتيح API عند المحو إلا إذا أزلتها صراحة من بطاقة المزوّد.</p>
+<figure><img src="../screenshots/ar-settings-privacy.png"><figcaption><b>شكل 9-2:</b> إعدادات الخصوصية والبيانات والشبكة.</figcaption></figure>
+<h3>أمان مفاتيح API</h3>
+<ul>
+<li>تُخزّن المفاتيح في مخزن بيانات الاعتماد الآمن لنظام التشغيل، لا في ملفات التطبيق ولا في قاعدة البيانات.</li>
+<li>لا تُعرض المفاتيح بعد حفظها، ولا تُكتب في السجلات أو رسائل الخطأ؛ ويُزال أي أثر لها من ردود المزوّدين قبل عرضها.</li>
+<li>لا تتصل الواجهة بالإنترنت مباشرة؛ فكل الطلبات تمر عبر الجزء الأصلي الذي يسمح فقط بعناوين المزوّدين المعتمدة.</li>
+</ul>
+<h3>معالجة البيانات لدى الأطراف الخارجية</h3>
+<p>عند استخدام مزوّد سحابي تُرسل نصوصك ووصف الصور إليه للمعالجة، ويخضع ذلك لشروطه وسياسة الخصوصية لديه. ويظهر بجوار كل زر تنفيذ اسم الجهة المستقبلة والنموذج. وإذا أردت إبقاء النصوص على جهازك تمامًا فاستخدم خادمًا محليًا مثل Ollama.</p>
+<table><thead><tr><th>البيان</th><th>مكان التخزين</th></tr></thead><tbody>
+<tr><td>الإعدادات والسجل والمحادثات والصور (macOS)</td><td class="ltr">~/Library/Application Support/com.ismaielalmarie.smarttextai/smarttext.db</td></tr>
+<tr><td>الإعدادات والسجل والمحادثات والصور (Windows)</td><td class="ltr">%APPDATA%\com.ismaielalmarie.smarttextai\smarttext.db</td></tr>
+<tr><td>مفاتيح API</td><td>Keychain في macOS، وCredential Manager في Windows</td></tr>
+</tbody></table>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="chapter" data-ch="10" data-title="حل المشكلات">
+<div class="chapter-head"><div class="n">10</div><div class="t"><small>الفصل العاشر</small><h2>حل المشكلات</h2></div></div>
+<p>تظهر الأخطاء في مربع أحمر يشرح السبب بالعربية، ويتضمن عند الحاجة رسالة المزوّد الأصلية (بعد حذف أي بيانات حساسة) وزر <strong>فتح الإعدادات</strong> أو <strong>إعادة المحاولة</strong>.</p>
+<table><thead><tr><th>الرسالة / العَرَض</th><th>السبب المحتمل</th><th>الحل</th></tr></thead><tbody>
+<tr><td>رفض المزوّد مفتاح API</td><td>مفتاح خاطئ أو ملغى أو منسوخ ناقصًا</td><td>أنشئ مفتاحًا جديدًا واحفظه عبر «استبدال المفتاح»، ثم اختبر الاتصال.</td></tr>
+<tr><td>لا يوجد مفتاح API محفوظ</td><td>لم يُحفظ مفتاح للمزوّد المختار</td><td>احفظ المفتاح في بطاقة المزوّد، أو اختر مزوّدًا آخر.</td></tr>
+<tr><td>تعذّر الوصول إلى المزوّد</td><td>انقطاع الإنترنت، جدار حماية، أو عنوان خادم خاطئ</td><td>تحقق من الاتصال ومن عنوان الخادم، وتأكد أن Ollama يعمل إن كنت تستخدمه.</td></tr>
+<tr><td>تجاوزت حد الطلبات</td><td>طلبات كثيرة في وقت قصير</td><td>انتظر قليلًا؛ يعيد التطبيق المحاولة تلقائيًا. يمكن زيادة عدد المحاولات من الإعدادات.</td></tr>
+<tr><td>لم يتبقَّ رصيد أو حصة</td><td>انتهاء الرصيد أو تجاوز حد الإنفاق</td><td>أضف رصيدًا أو ارفع الحد من لوحة حسابك لدى المزوّد.</td></tr>
+<tr><td>استغرق المزوّد وقتًا طويلًا</td><td>نص طويل جدًا أو بطء المزوّد</td><td>أعد المحاولة، أو قسّم النص، أو زِد المهلة من الإعدادات ← الشبكة.</td></tr>
+<tr><td>أعاد المزوّد نتيجة فارغة</td><td>رفض ضمني أو إدخال غير واضح</td><td>أعد صياغة الإدخال أو جرّب نموذجًا آخر.</td></tr>
+<tr><td>لا يتعرّف المزوّد على النموذج</td><td>معرّف نموذج خاطئ أو غير متاح لحسابك</td><td>استخدم «تحميل النماذج» واختر نموذجًا من القائمة.</td></tr>
+<tr><td>فشل توليد الصورة</td><td>رفض وفق سياسة المحتوى، أو حد الطلبات، أو عدم توفر النموذج</td><td>عدّل الوصف، أو جرّب جودة أقل، أو تحقق من صلاحيات حسابك لتوليد الصور.</td></tr>
+<tr><td>عنوان الخادم غير مسموح</td><td>استخدام http:// مع خادم بعيد</td><td>استخدم https://، فعنوان http:// مسموح لـ localhost فقط.</td></tr>
+<tr><td>سلسلة مفاتيح النظام غير متاحة</td><td>سلسلة المفاتيح مقفلة أو مرفوض الوصول إليها</td><td>افتح قفل سلسلة المفاتيح ووافق على طلب الوصول، ثم أعد الحفظ.</td></tr>
+<tr><td>أخطاء التثبيت</td><td>توقيع مفقود أو حزمة غير مطابقة</td><td>راجع جدول مشكلات التثبيت في الفصل الثاني.</td></tr>
+<tr><td>نظام أو معمارية غير مدعومة</td><td>Windows ‏32 بت أو ARM، أو macOS أقدم من 10.15</td><td>استخدم جهازًا بنظام مدعوم؛ هذه البيئات غير مدعومة في الإصدار الحالي.</td></tr>
+</tbody></table>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="chapter" data-ch="11" data-title="الأسئلة الشائعة">
+<div class="chapter-head"><div class="n">11</div><div class="t"><small>الفصل الحادي عشر</small><h2>الأسئلة الشائعة</h2></div></div>
+<h4>هل يعمل التطبيق دون اتصال بالإنترنت؟</h4>
+<p>جزئيًا. فحص التشابه والسجل والإعدادات تعمل دون اتصال. أما ميزات الذكاء الاصطناعي فتحتاج إلى مزوّد: سحابي (يتطلب إنترنت) أو محلي مثل Ollama (يعمل دون إنترنت بعد تنزيل النموذج).</p>
+<h4>هل يتطلب اشتراكًا؟</h4>
+<p>لا يتطلب SmartText اشتراكًا خاصًا به. تدفع لمزوّد الذكاء الاصطناعي فقط مقابل استخدامك، حسب أسعاره، أو تستخدم نموذجًا محليًا مجانيًا.</p>
+<h4>هل يعمل دون مفاتيح API؟</h4>
+<p>تعمل الواجهة وفحص التشابه والسجل دون مفاتيح. وميزات النصوص تعمل دون مفتاح إذا استخدمت خادمًا محليًا. أما OpenAI وAnthropic وتوليد الصور فتتطلب مفاتيح.</p>
+<h4>هل النتائج المولّدة دقيقة دائمًا؟</h4>
+<p>لا. قد يخطئ الذكاء الاصطناعي في المعلومات أو يغيّر بعض الدلالات. راجع أي محتوى مهم قبل استخدامه، وتحقق من الحقائق والأرقام والمراجع.</p>
+<h4>كيف تُحتسب التكاليف؟</h4>
+<p>يحتسب المزوّد التكلفة عادةً حسب عدد الرموز (Tokens) المرسلة والمستقبلة للنصوص، وحسب عدد الصور وحجمها وجودتها للصور. يعرض التطبيق عدد الرموز عندما يوفّره المزوّد، وتجد التفاصيل في صفحة الأسعار ولوحة الاستخدام لديه.</p>
+<h4>أين تُحفظ الملفات المحلية؟</h4>
+<p>في ملف قاعدة البيانات <code>smarttext.db</code> داخل مجلد إعدادات التطبيق (انظر الجدول في الفصل التاسع)، ويظهر المسار الدقيق في الإعدادات ← الخصوصية والبيانات. أما الملفات التي تصدّرها فتُحفظ حيث تختار.</p>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="chapter" data-ch="12" data-title="المطورون والدعم الفني">
+<div class="chapter-head"><div class="n">12</div><div class="t"><small>الفصل الثاني عشر</small><h2>المطورون والدعم الفني</h2></div></div>
+<h3>بنية مجلدات المشروع</h3>
+<pre>smarttext-ai/
+├── src/                 <span class="c"># React + TypeScript UI</span>
+│   ├── pages/           <span class="c"># Dashboard, Humanizer, Chat, WritingTools, ImageGenerator, …</span>
+│   ├── components/      <span class="c"># reusable UI: DiffView, Markdown, ErrorAlert, ProviderCard…</span>
+│   ├── state/           <span class="c"># zustand stores</span>
+│   ├── i18n/            <span class="c"># en.ts, ar.ts</span>
+│   └── lib/ai | db | text
+├── src-tauri/           <span class="c"># Rust: keychain, provider proxy, file saving, tauri.conf.json</span>
+├── server/              <span class="c"># browser dev-mode proxy (Node/TypeScript)</span>
+├── tests/               <span class="c"># Vitest suites</span>
+├── scripts/             <span class="c"># mock provider, screenshots/E2E, PDF manual</span>
+└── .github/workflows/   <span class="c"># CI + macOS/Windows release builds</span></pre>
+<h3>تشغيل وضع التطوير</h3>
+<pre>npm ci
+npm run tauri dev        <span class="c"># desktop app with hot reload</span>
+npm test                 <span class="c"># automated tests (mocked providers)</span>
+cd src-tauri && cargo test</pre>
+<h3>بناء حزم الإصدار</h3>
+<pre>npm run tauri build                                      <span class="c"># current OS</span>
+npm run tauri build -- --target aarch64-apple-darwin     <span class="c"># macOS Apple Silicon</span>
+npm run tauri build -- --target x86_64-apple-darwin      <span class="c"># macOS Intel</span>
+npm run tauri build -- --target universal-apple-darwin   <span class="c"># macOS universal</span></pre>
+<p>البناء على نظام واحد لا ينتج حزم الأنظمة الأخرى. لبناء حزم macOS وWindows معًا، شغّل سير العمل <code>.github/workflows/release.yml</code> من تبويب Actions، أو ادفع وسمًا مثل <code>v1.0.0</code>. وتفاصيل التوقيع والتوثيق في <code>INSTALL_MACOS.md</code> و<code>INSTALL_WINDOWS.md</code>.</p>
+<h3>إضافة مزوّدي ذكاء اصطناعي جدد</h3>
+<ul>
+<li>إذا كان المزوّد متوافقًا مع OpenAI Chat Completions فلا حاجة لأي برمجة: اختر «خادم متوافق مع OpenAI» وأدخل عنوانه.</li>
+<li>وإلا: أضف عنوانه وطريقة المصادقة في <code>src-tauri/src/provider.rs</code> و<code>server/providerProxy.ts</code>، واكتب محوّلًا (Adapter) في <code>src/lib/ai/providers/</code> يطبّق الواجهة <code>TextAdapter</code>، وسجّله في <code>registry.ts</code>، وأضف ترجمات الاسم، ثم اختبارات بردود مُحاكاة. التفاصيل الكاملة في <code>TECHNICAL_GUIDE.md</code>.</li>
+</ul>
+<div class="credit">
+  <div class="who">تصميم وتطوير</div>
+  <div class="name">Ismaiel Almarie</div>
+  <div style="color:var(--muted);font-size:9.5pt;margin-top:2mm">SmartText AI — الإصدار 1.0.0 — رخصة MIT</div>
+</div>
+<figure style="margin-top:6mm"><img src="../screenshots/ar-about.png"><figcaption><b>شكل 12-1:</b> شاشة «حول التطبيق» مع اسم المطوّر.</figcaption></figure>
+</section>
+
+<!-- ============ Final checklist ============ -->
+<section class="chapter" data-ch="✓" data-title="قائمة التحقق النهائية وحالة الميزات">
+<div class="chapter-head"><div class="n">✓</div><div class="t"><small>ملحق</small><h2>قائمة التحقق النهائية وحالة الميزات</h2></div></div>
+<h3>قبل الاستخدام اليومي</h3>
+<ul class="checklist">
+<li>ثبّتُّ الحزمة المطابقة لنظامي ومعالجي.</li>
+<li>اخترت لغة الواجهة والسمة.</li>
+<li>حفظت مفتاح API واحدًا على الأقل، أو هيّأت خادمًا محليًا.</li>
+<li>نجح «اختبار الاتصال» واخترت النموذج.</li>
+<li>راجعت إعدادات الخصوصية وحفظ السجل.</li>
+<li>أعرف أن الاستخدام يُحتسب على حسابي لدى المزوّد.</li>
+</ul>
+<h3>حالة الميزات في الإصدار 1.0.0</h3>
+<table><thead><tr><th>الميزة</th><th>الحالة</th><th>ملاحظات</th></tr></thead><tbody>
+<tr><td>مُحسِّن النصوص والمقارنة</td><td class="status-yes">مُنفّذ ومُختبَر</td><td>اختبارات آلية بردود مُحاكاة؛ يتطلب مفتاحًا لنتائج حقيقية.</td></tr>
+<tr><td>المحادثة الذكية وسجلها</td><td class="status-yes">مُنفّذ ومُختبَر</td><td>دون بث تدريجي للردود.</td></tr>
+<tr><td>أدوات الكتابة الاثنتا عشرة</td><td class="status-yes">مُنفّذ ومُختبَر</td><td>يتطلب مفتاحًا لنتائج حقيقية.</td></tr>
+<tr><td>توليد الصور</td><td class="status-yes">مُنفّذ ومُختبَر</td><td>عبر OpenAI؛ لم يُختبر باتصال حقيقي لعدم توفر مفتاح.</td></tr>
+<tr><td>فحص التشابه المحلي</td><td class="status-yes">مُنفّذ ومُختبَر</td><td>يعمل محليًا دون مفاتيح.</td></tr>
+<tr><td>كشف النصوص المولّدة آليًا</td><td class="status-no">غير مُنفّذ</td><td>واجهة ربط فقط، دون درجات.</td></tr>
+<tr><td>الواجهة العربية والإنجليزية (RTL)</td><td class="status-yes">مُنفّذ ومُختبَر</td><td></td></tr>
+<tr><td>حفظ المفاتيح في سلسلة مفاتيح النظام</td><td class="status-part">مُنفّذ</td><td>يحتاج إلى اختبار فعلي على macOS وWindows.</td></tr>
+<tr><td>حزم macOS (<code>.dmg</code>)</td><td class="status-part">إعدادات جاهزة</td><td>تُبنى على جهاز Mac أو عبر GitHub Actions.</td></tr>
+<tr><td>حزم Windows (<code>.msi</code> و<code>-setup.exe</code>)</td><td class="status-part">إعدادات جاهزة</td><td>تُبنى على جهاز Windows أو عبر GitHub Actions.</td></tr>
+<tr><td>حزم Linux (<code>.deb</code> وAppImage)</td><td class="status-yes">مبنية ومُشغّلة</td><td>بيئة التطوير؛ ليست هدفًا رسميًا.</td></tr>
+</tbody></table>
+<p style="text-align:center;color:var(--muted);margin-top:8mm">— نهاية الدليل —</p>
+</section>
+
+</body>
+</html>

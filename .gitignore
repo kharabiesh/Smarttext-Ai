@@ -1,0 +1,13 @@
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/schemas/
+.env
+.env.local
+*.log
+.DS_Store
+coverage/
+scripts/manual/.out/
+*.tsbuildinfo
+docs/e2e-failure.png
+docs/manual/.render.html

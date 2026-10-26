@@ -1,0 +1,12 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Permissions for the SmartText AI main window",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "sql:default",
+    "sql:allow-execute",
+    "dialog:default"
+  ]
+}
