@@ -59,10 +59,10 @@
 </ol>
 <h3>اختر الملف المناسب</h3>
 <table class="files"><thead><tr><th>اسم الملف</th><th>لمن هو</th></tr></thead><tbody>
-<tr><td>SmartText AI_1.0.0_aarch64.dmg</td><td>أجهزة Mac بمعالجات Apple Silicon</td></tr>
-<tr><td>SmartText AI_1.0.0_x64.dmg</td><td>أجهزة Mac بمعالجات Intel</td></tr>
-<tr><td>SmartText AI_1.0.0_x64-setup.exe</td><td>Windows: المثبّت الموصى به للمستخدم العادي، ويتيح اختيار العربية</td></tr>
-<tr><td>SmartText AI_1.0.0_x64_en-US.msi</td><td>Windows: حزمة MSI للنشر المؤسسي عبر أقسام تقنية المعلومات</td></tr>
+<tr><td>SmartText-AI_1.0.0_aarch64.dmg</td><td>أجهزة Mac بمعالجات Apple Silicon</td></tr>
+<tr><td>SmartText-AI_1.0.0_x64.dmg</td><td>أجهزة Mac بمعالجات Intel</td></tr>
+<tr><td>SmartText-AI_1.0.0_x64-setup.exe</td><td>Windows: المثبّت الموصى به للمستخدم العادي، ويتيح اختيار العربية</td></tr>
+<tr><td>SmartText-AI_1.0.0_x64_en-US.msi</td><td>Windows: حزمة MSI للنشر المؤسسي عبر أقسام تقنية المعلومات</td></tr>
 </tbody></table>
 <div class="note"><b>تحقّق من مصدر الملف</b>نزّل ملفات التثبيت فقط من صفحة الإصدارات (Releases) في مستودع المشروع على GitHub، أو من الشخص الذي بناها لك مباشرة. لا تثبّت نسخًا من مواقع تنزيل عامة.</div>
 </section>
@@ -106,15 +106,15 @@
 <div class="chapter-head"><div class="n">3</div><div class="t"><small>الفصل الثالث</small><h2>التثبيت على Windows</h2></div></div>
 <h3>التثبيت بالمثبّت (setup.exe)</h3>
 <ol class="steps">
-<li>انقر نقرًا مزدوجًا على <code>SmartText AI_1.0.0_x64-setup.exe</code>.</li>
+<li>انقر نقرًا مزدوجًا على <code>SmartText-AI_1.0.0_x64-setup.exe</code>.</li>
 <li>اختر لغة المثبّت: <strong>العربية</strong> أو English.</li>
 <li>اتبع خطوات المعالج واضغط <strong>تثبيت</strong>. يُثبَّت التطبيق للمستخدم الحالي، فلا يحتاج عادةً إلى صلاحيات المسؤول.</li>
 <li>إذا لم يكن WebView2 مثبّتًا، ينزّله المثبّت ويثبّته تلقائيًا؛ لذا تأكد من اتصالك بالإنترنت في هذه الخطوة.</li>
 <li>شغّل التطبيق من قائمة <strong>ابدأ</strong> أو من اختصار سطح المكتب.</li>
 </ol>
 <h3>التثبيت بحزمة MSI</h3>
-<p>حزمة <code>SmartText AI_1.0.0_x64_en-US.msi</code> مخصّصة للنشر في المؤسسات عبر أدوات مثل Group Policy أو Intune. واجهة مثبّتها بالإنجليزية فقط، أما التطبيق نفسه فيدعم العربية كاملة. ويمكن تثبيتها بصمت من سطر الأوامر:</p>
-<pre>msiexec /i "SmartText AI_1.0.0_x64_en-US.msi" /qn</pre>
+<p>حزمة <code>SmartText-AI_1.0.0_x64_en-US.msi</code> مخصّصة للنشر في المؤسسات عبر أدوات مثل Group Policy أو Intune. واجهة مثبّتها بالإنجليزية فقط، أما التطبيق نفسه فيدعم العربية كاملة. ويمكن تثبيتها بصمت من سطر الأوامر:</p>
+<pre>msiexec /i "SmartText-AI_1.0.0_x64_en-US.msi" /qn</pre>
 <h3>إذا ظهر تحذير SmartScreen</h3>
 <p>قد تظهر رسالة «Windows protected your PC» عند تشغيل مثبّت غير موقّع رقميًا. اضغط <strong>More info</strong> (مزيد من المعلومات)، ثم <strong>Run anyway</strong> (التشغيل على أي حال). التوقيع الرقمي للمثبّت يزيل هذا التحذير تدريجيًا مع بناء السمعة لدى Microsoft.</p>
 <h3>التحديث إلى إصدار أحدث</h3>
@@ -155,10 +155,10 @@
 <ol class="steps">
 <li>أنشئ مستودعًا جديدًا على GitHub وارفع إليه شيفرة المشروع (ملف <code>smarttext-ai-source.zip</code>).</li>
 <li>افتح تبويب <strong>Actions</strong> في المستودع، واختر سير العمل <strong>Release builds</strong>.</li>
-<li>اضغط <strong>Run workflow</strong>، أو ادفع وسمًا مثل <code>v1.0.0</code> إلى المستودع.</li>
+<li>اضغط <strong>Run workflow</strong>، واكتب في خانة <strong>release_tag</strong> رقم الإصدار، مثل <code>v1.0.0</code>، ثم اضغط زر التشغيل الأخضر.</li>
 <li>انتظر انتهاء المهام الثلاث: macOS (Apple Silicon)، وmacOS (Intel)، وWindows x64. يستغرق ذلك عادةً بين 15 و30 دقيقة.</li>
-<li>نزّل الملفات من قسم <strong>Artifacts</strong> أسفل صفحة التشغيل، أو من صفحة <strong>Releases</strong> حيث يُنشأ إصدار مسودّة (Draft) بالملفات عند دفع وسم.</li>
-<li>راجع الإصدار المسودّة، ثم اضغط <strong>Publish release</strong> لتحصل على روابط تنزيل دائمة تشاركها مع المستخدمين.</li>
+<li>افتح صفحة <strong>Releases</strong> في المستودع؛ ستجد إصدارًا جديدًا عليه ملفات التثبيت الثلاثة، ورابطه دائم ويمكنك مشاركته مع المستخدمين.</li>
+<li>إذا تركت خانة release_tag فارغة، فلن يُنشأ إصدار، وتجد الملفات في قسم <strong>Artifacts</strong> أسفل صفحة التشغيل.</li>
 </ol>
 <div class="note"><b>التوقيع الرقمي (اختياري)</b>بدون توقيع تعمل الملفات، لكنها تُظهر تحذيرات Gatekeeper وSmartScreen الموضّحة في الفصلين الثاني والثالث. لتوقيع نسخ macOS وتوثيقها أضف شهادة Apple Developer ID وبياناتها إلى أسرار المستودع (Secrets) كما يشرح ملف <code>INSTALL_MACOS.md</code>. وتوقيع Windows يحتاج إلى شهادة توقيع برمجيات، والتفاصيل في <code>INSTALL_WINDOWS.md</code>.</div>
 <h3>الطريقة الثانية: البناء على جهازك</h3>

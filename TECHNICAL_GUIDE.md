@@ -113,4 +113,4 @@ Every failure becomes an `AiError` with a code. The UI shows the localized messa
 
 1. Bump the version in `package.json`, `src-tauri/tauri.conf.json` and `src-tauri/Cargo.toml` (a test checks they match).
 2. `npm test && (cd src-tauri && cargo test)`
-3. Push a tag `vX.Y.Z`. The **Release builds** workflow builds the macOS arm64/x64 DMGs and the Windows MSI/NSIS installers, then attaches them to a draft GitHub release.
+3. Push a tag `vX.Y.Z`. The **Release builds** workflow builds the macOS arm64/x64 DMGs and the Windows MSI/NSIS installers, then publishes a GitHub release with them attached. Without pushing a tag, run the workflow from the Actions tab and fill in **release_tag** (for example `v1.0.0`); leave it empty to only build (installers are then available as workflow artifacts).

@@ -97,7 +97,9 @@ jobs:
   release:
     name: GitHub release
     needs: build
-    if: startsWith(github.ref, 'refs/tags/') || inputs.release_tag != ''
+    # Runs even when one platform failed (e.g. no macOS runner was available), so the installers
+    # that did build are published; re-running later adds the missing ones to the same release.
+    if: always() && needs.build.result != 'skipped' && (startsWith(github.ref, 'refs/tags/') || inputs.release_tag != '')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -124,5 +126,10 @@ jobs:
           (or run `xattr -dr com.apple.quarantine "/Applications/SmartText AI.app"`). On Windows, if SmartScreen
           appears, choose **More info → Run anyway**. See `INSTALL_GUIDE_AR.pdf` in the repository (Arabic).
           EOF
-          gh release create "$TAG" installers/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
-            --title "SmartText AI ${TAG#v}" --notes-file notes.md
+          ls installers/* > /dev/null || { echo "::error::No installers were built."; exit 1; }
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            gh release upload "$TAG" installers/* --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$TAG" installers/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title "SmartText AI ${TAG#v}" --notes-file notes.md
+          fi

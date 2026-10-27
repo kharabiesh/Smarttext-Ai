@@ -1,0 +1,53 @@
+name: Publish installers from a run
+
+# Attaches the installers of an earlier "Release builds" run to a GitHub release (created if
+# missing). Useful when a later run could not get a runner for one platform.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "ID of a Release builds run whose installers should be published"
+        required: true
+      release_tag:
+        description: "Release tag, e.g. v1.0.0"
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: installers
+          merge-multiple: true
+      - name: Create or update release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.release_tag }}
+        run: |
+          ls -la installers
+          cat > notes.md <<'NOTES'
+          **SmartText AI** — designed and developed by Ismaiel Almarie.
+
+          | Your computer | Download |
+          |---|---|
+          | Mac with Apple Silicon (M1, M2, M3, M4…) | `SmartText-AI_*_aarch64.dmg` |
+          | Mac with Intel processor | `SmartText-AI_*_x64.dmg` |
+          | Windows 10 / 11 (64-bit) | `SmartText-AI_*_x64-setup.exe` (or the `.msi` for IT deployment) |
+
+          These builds are not code-signed. On macOS, right-click the app and choose **Open** the first time
+          (or run `xattr -dr com.apple.quarantine "/Applications/SmartText AI.app"`). On Windows, if SmartScreen
+          appears, choose **More info → Run anyway**. See `INSTALL_GUIDE_AR.pdf` in the repository (Arabic).
+          NOTES
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            gh release upload "$TAG" installers/* --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$TAG" installers/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title "SmartText AI ${TAG#v}" --notes-file notes.md
+          fi

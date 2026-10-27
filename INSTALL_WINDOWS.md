@@ -6,8 +6,8 @@ Supported: **Windows 10 (1803+) and Windows 11, 64-bit (x64)**.
 
 ## 1. Install as a user
 
-- **NSIS installer:** run `SmartText AI_1.0.0_x64-setup.exe`. It offers English or Arabic and installs for the current user.
-- **MSI:** run `SmartText AI_1.0.0_x64_en-US.msi`. Suited to IT or group-policy deployment.
+- **NSIS installer:** run `SmartText-AI_1.0.0_x64-setup.exe`. It offers English or Arabic and installs for the current user.
+- **MSI:** run `SmartText-AI_1.0.0_x64_en-US.msi`. Suited to IT or group-policy deployment.
 
 The app needs the Microsoft **Edge WebView2** runtime. It is built into Windows 11 and current Windows 10. If it is missing, the installer downloads it, so the first install needs an internet connection.
 
