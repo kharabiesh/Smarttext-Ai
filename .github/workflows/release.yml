@@ -1,7 +1,7 @@
 name: Release builds
 
 # Builds installers on native runners:
-#   macOS Apple Silicon (aarch64) and Intel (x86_64): .app + .dmg
+#   macOS universal (Apple Silicon + Intel in one app): .dmg
 #   Windows 10/11 x64: .msi (WiX) + -setup.exe (NSIS)
 # The installers are always uploaded as workflow artifacts. A GitHub release with the installers
 # attached is created when a tag such as v1.0.0 is pushed, or when the workflow is run from the
@@ -23,16 +23,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: macOS (Apple Silicon)
+          # One universal app that runs natively on both Apple Silicon and Intel Macs.
+          - name: macOS (universal)
             platform: macos-latest
-            args: --target aarch64-apple-darwin
-            rust_targets: aarch64-apple-darwin
-            artifact: macos-apple-silicon
-          - name: macOS (Intel)
-            platform: macos-latest
-            args: --target x86_64-apple-darwin
-            rust_targets: x86_64-apple-darwin
-            artifact: macos-intel
+            args: --target universal-apple-darwin
+            rust_targets: aarch64-apple-darwin,x86_64-apple-darwin
+            artifact: macos-universal
           - name: Windows x64
             platform: windows-latest
             args: ""
@@ -118,8 +114,7 @@ jobs:
 
           | Your computer | Download |
           |---|---|
-          | Mac with Apple Silicon (M1, M2, M3, M4…) | `SmartText-AI_*_aarch64.dmg` |
-          | Mac with Intel processor | `SmartText-AI_*_x64.dmg` |
+          | Any Mac (Apple Silicon or Intel), macOS 10.15+ | `SmartText-AI_*_universal.dmg` |
           | Windows 10 / 11 (64-bit) | `SmartText-AI_*_x64-setup.exe` (or the `.msi` for IT deployment) |
 
           These builds are not code-signed. On macOS, right-click the app and choose **Open** the first time

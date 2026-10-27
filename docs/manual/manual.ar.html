@@ -69,7 +69,7 @@
 <div class="warn"><b>حالة حزم التثبيت في هذا الإصدار</b>إعدادات بناء حزم macOS (<code>.dmg</code>) وWindows (<code>.msi</code> و<code>-setup.exe</code>) مكتملة، ويوجد سير عمل GitHub Actions يبنيها على أجهزة macOS وWindows حقيقية. غير أن هذا الدليل أُعدّ في بيئة Linux، فلم تُبنَ حزم macOS وWindows ولم تُختبر بعد؛ وما ورد أدناه هو خطوات التثبيت المعتادة لهذه الحزم عند بنائها.</div>
 <h3>التثبيت على macOS</h3>
 <ol class="steps">
-<li>نزّل الملف المناسب لجهازك: <code>SmartText-AI_1.0.0_aarch64.dmg</code> لأجهزة Apple Silicon (M1 وما بعدها)، أو <code>SmartText-AI_1.0.0_x64.dmg</code> لأجهزة Intel.</li>
+<li>نزّل الملف <code>SmartText-AI_1.0.0_universal.dmg</code>، وهو يعمل على كل أجهزة Mac، سواء بمعالجات Apple Silicon أو Intel.</li>
 <li>افتح الملف واسحب أيقونة <strong>SmartText AI</strong> إلى مجلد <strong>Applications</strong>.</li>
 <li>شغّل التطبيق من مجلد التطبيقات أو من Launchpad.</li>
 </ol>
@@ -91,7 +91,7 @@
 <h3>حل مشكلات التثبيت الشائعة</h3>
 <table><thead><tr><th>المشكلة</th><th>الحل</th></tr></thead><tbody>
 <tr><td>macOS: «التطبيق تالف ولا يمكن فتحه»</td><td>الملف عليه علامة الحجر لأنه غير موقّع: نفّذ أمر <code>xattr</code> المذكور أعلاه.</td></tr>
-<tr><td>macOS: التطبيق لا يعمل على جهازي</td><td>تأكد من اختيار الحزمة المطابقة لمعالجك (aarch64 أو x64) أو استخدم الحزمة الشاملة.</td></tr>
+<tr><td>macOS: «التطبيق غير مدعوم على هذا الـ Mac»</td><td>استخدم ملف <code>universal.dmg</code> الذي يعمل على معالجات Apple وIntel، وتأكد أن النظام 10.15 أو أحدث.</td></tr>
 <tr><td>Windows: نافذة فارغة بيضاء</td><td>ثبّت أو أصلح Microsoft Edge WebView2 Runtime.</td></tr>
 <tr><td>Windows: فشل تثبيت MSI</td><td>استخدم مثبّت <code>-setup.exe</code> بدلًا منه، أو شغّل MSI بصلاحيات المسؤول.</td></tr>
 <tr><td>«النظام غير مدعوم»</td><td>الإصدار يدعم Windows ‏64 بت فقط وmacOS ‏10.15 فأحدث.</td></tr>

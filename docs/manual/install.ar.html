@@ -35,7 +35,7 @@
 <!-- ============ 1 ============ -->
 <section class="chapter" data-ch="1" data-title="قبل البدء">
 <div class="chapter-head"><div class="n">1</div><div class="t"><small>الفصل الأول</small><h2>قبل البدء</h2></div></div>
-<div class="warn"><b>حالة ملفات التثبيت حاليًا</b>إعدادات بناء ملفات التثبيت لنظامي macOS وWindows مكتملة، ومعها سير عمل على GitHub Actions يبنيها على أجهزة macOS وWindows حقيقية. لكن هذه الملفات <strong>لم تُبنَ بعد ولم تُختبر</strong>، لأن التطوير جرى في بيئة Linux، ولا يوجد حتى الآن رابط تنزيل جاهز لها. للحصول عليها اتبع الفصل الخامس «الحصول على ملفات التثبيت»، ثم عُد إلى خطوات التثبيت في الفصلين الثاني والثالث.</div>
+<div class="warn"><b>حالة ملفات التثبيت حاليًا</b>تُبنى ملفات التثبيت آليًا على أجهزة macOS وWindows حقيقية عبر GitHub Actions، وتُنشر في صفحة الإصدارات (Releases) في مستودع المشروع على GitHub. هذه الملفات <strong>غير موقّعة رقميًا</strong>، لذا يظهر تحذير أمان عند أول تشغيل (انظر الفصلين الثاني والثالث). وقد اجتازت الاختبارات الآلية أثناء البناء، لكن تثبيتها لم يُجرَّب يدويًا بعد على كل إصدارات macOS وWindows.</div>
 <h3>ما الذي تحتاجه</h3>
 <table><thead><tr><th>المتطلب</th><th>macOS</th><th>Windows</th></tr></thead><tbody>
 <tr><td>إصدار النظام</td><td>10.15 (Catalina) أو أحدث</td><td>Windows 10 الإصدار 1803 أو أحدث، أو Windows 11</td></tr>
@@ -59,8 +59,7 @@
 </ol>
 <h3>اختر الملف المناسب</h3>
 <table class="files"><thead><tr><th>اسم الملف</th><th>لمن هو</th></tr></thead><tbody>
-<tr><td>SmartText-AI_1.0.0_aarch64.dmg</td><td>أجهزة Mac بمعالجات Apple Silicon</td></tr>
-<tr><td>SmartText-AI_1.0.0_x64.dmg</td><td>أجهزة Mac بمعالجات Intel</td></tr>
+<tr><td>SmartText-AI_1.0.0_universal.dmg</td><td>كل أجهزة Mac: بمعالجات Apple Silicon وIntel معًا</td></tr>
 <tr><td>SmartText-AI_1.0.0_x64-setup.exe</td><td>Windows: المثبّت الموصى به للمستخدم العادي، ويتيح اختيار العربية</td></tr>
 <tr><td>SmartText-AI_1.0.0_x64_en-US.msi</td><td>Windows: حزمة MSI للنشر المؤسسي عبر أقسام تقنية المعلومات</td></tr>
 </tbody></table>
@@ -188,7 +187,7 @@ npm run tauri build</pre>
 <table><thead><tr><th>المشكلة</th><th>السبب المحتمل</th><th>الحل</th></tr></thead><tbody>
 <tr><td>macOS: «لا يمكن التحقق من المطوّر»</td><td>النسخة غير موقّعة أو غير موثّقة</td><td>افتح التطبيق بالنقر الأيمن ثم «فتح»، أو من الخصوصية والأمان ← «فتح على أي حال».</td></tr>
 <tr><td>macOS: «التطبيق تالف ولا يمكن فتحه»</td><td>علامة الحجر على ملف غير موقّع</td><td>نفّذ أمر <code>xattr</code> الوارد في الفصل الثاني.</td></tr>
-<tr><td>macOS: التطبيق لا يعمل أو بطيء جدًا</td><td>نسخة لا تطابق معالج الجهاز</td><td>ثبّت ملف aarch64 لأجهزة Apple Silicon، وملف x64 لأجهزة Intel.</td></tr>
+<tr><td>macOS: «التطبيق غير مدعوم على هذا الـ Mac»</td><td>نسخة خاصة بمعالج آخر (مثل ملف aarch64 على جهاز Intel)، أو نظام أقدم من macOS 10.15</td><td>نزّل ملف <code>universal.dmg</code> الذي يعمل على المعالجين، وتأكد أن إصدار النظام 10.15 أو أحدث.</td></tr>
 <tr><td>macOS: يتكرر طلب كلمة المرور عند كل طلب</td><td>اختيار «السماح» بدل «السماح دائمًا»</td><td>اختر «السماح دائمًا» في نافذة سلسلة المفاتيح التالية.</td></tr>
 <tr><td>Windows: «Windows protected your PC»</td><td>المثبّت غير موقّع</td><td>More info ← Run anyway.</td></tr>
 <tr><td>Windows: نافذة بيضاء فارغة</td><td>WebView2 غير مثبّت أو تالف</td><td>نزّل «Microsoft Edge WebView2 Runtime» من موقع Microsoft وثبّته، أو أصلحه من التطبيقات المثبّتة.</td></tr>

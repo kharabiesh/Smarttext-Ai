@@ -6,7 +6,7 @@ Supported: macOS 10.15 or later, on **Apple Silicon (arm64)** and **Intel (x86_6
 
 ## 1. Install as a user
 
-1. Open the `.dmg` (for example `SmartText-AI_1.0.0_aarch64.dmg` for Apple Silicon or `…_x64.dmg` for Intel) and drag **SmartText AI** into **Applications**.
+1. Open `SmartText-AI_1.0.0_universal.dmg` (one app for both Apple Silicon and Intel Macs; the release workflow builds this universal DMG) and drag **SmartText AI** into **Applications**.
 2. First launch of an **unsigned** build: macOS Gatekeeper will block it ("cannot be opened because the developer cannot be verified"). Either:
    - right-click the app in Applications → **Open** → **Open**, or
    - System Settings → Privacy & Security → **Open Anyway**, or
