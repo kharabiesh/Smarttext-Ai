@@ -63,6 +63,16 @@ jobs:
           releaseName: ${{ startsWith(github.ref, 'refs/tags/') && format('SmartText AI {0}', github.ref_name) || '' }}
           releaseDraft: true
 
+      # Job logs are not always reachable; on failure, repeat the build and surface its last
+      # lines as a single annotation, which the checks API and the run summary always show.
+      - name: Report build error
+        if: failure()
+        shell: bash
+        run: |
+          npm run tauri build -- ${{ matrix.args }} > build.log 2>&1 || true
+          tail -n 60 build.log | sed 's/%/%25/g' | awk 'BEGIN{ORS="%0A"} {print}' > tail.txt
+          echo "::error title=tauri build output::$(cat tail.txt)"
+
       - name: Upload installers as workflow artifacts
         uses: actions/upload-artifact@v4
         with:
