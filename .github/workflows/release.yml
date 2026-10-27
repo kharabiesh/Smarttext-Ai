@@ -3,17 +3,22 @@ name: Release builds
 # Builds installers on native runners:
 #   macOS Apple Silicon (aarch64) and Intel (x86_64): .app + .dmg
 #   Windows 10/11 x64: .msi (WiX) + -setup.exe (NSIS)
-# Run manually from the Actions tab, or push a tag such as v1.0.0 to create a draft GitHub release.
+# The installers are always uploaded as workflow artifacts. A GitHub release with the installers
+# attached is created when a tag such as v1.0.0 is pushed, or when the workflow is run from the
+# Actions tab with "release_tag" filled in (the tag is then created on the selected commit).
 on:
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Create a GitHub release with this tag (e.g. v1.0.0). Leave empty to only build."
+        required: false
+        default: ""
   push:
     tags: ["v*"]
 
 jobs:
   build:
     name: ${{ matrix.name }}
-    permissions:
-      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -22,14 +27,17 @@ jobs:
             platform: macos-latest
             args: --target aarch64-apple-darwin
             rust_targets: aarch64-apple-darwin
+            artifact: macos-apple-silicon
           - name: macOS (Intel)
             platform: macos-latest
             args: --target x86_64-apple-darwin
             rust_targets: x86_64-apple-darwin
+            artifact: macos-intel
           - name: Windows x64
             platform: windows-latest
             args: ""
             rust_targets: ""
+            artifact: windows-x64
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
@@ -46,40 +54,75 @@ jobs:
       - run: npm ci
       - run: npm test
 
-      # Signing is optional: when these repository secrets are absent the build is unsigned
-      # (fine for testing; see INSTALL_MACOS.md / INSTALL_WINDOWS.md for distribution).
-      - uses: tauri-apps/tauri-action@v0
+      # Signing is optional. Unset secrets arrive as empty strings, and an empty APPLE_CERTIFICATE
+      # makes the bundler try (and fail) to import a certificate, so empty values are removed.
+      # See INSTALL_MACOS.md / INSTALL_WINDOWS.md for signing and notarization.
+      - name: Build installers
+        shell: bash
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
           APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-        with:
-          args: ${{ matrix.args }}
-          tagName: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
-          releaseName: ${{ startsWith(github.ref, 'refs/tags/') && format('SmartText AI {0}', github.ref_name) || '' }}
-          releaseDraft: true
+        run: |
+          for v in APPLE_CERTIFICATE APPLE_CERTIFICATE_PASSWORD APPLE_SIGNING_IDENTITY APPLE_ID APPLE_PASSWORD APPLE_TEAM_ID; do
+            [ -z "${!v}" ] && unset "$v"
+          done
+          # The macOS DMG step drives Finder and is occasionally flaky on hosted runners: retry.
+          for attempt in 1 2 3; do
+            if npm run tauri build -- ${{ matrix.args }} > build.log 2>&1; then cat build.log; exit 0; fi
+            # Surface the error as an annotation (job logs are not always reachable).
+            grep -v "^dist/" build.log | sed 's/\x1b\[[0-9;]*m//g' | tail -n 25 | sed 's/%/%25/g' | awk 'BEGIN{ORS="%0A"} {print}' > tail.txt
+            echo "::warning title=tauri build attempt $attempt failed::$(cat tail.txt)"
+          done
+          exit 1
 
-      # Job logs are not always reachable; on failure, repeat the build and surface its last
-      # lines as a single annotation, which the checks API and the run summary always show.
-      - name: Report build error
-        if: failure()
+      - name: Collect installers
         shell: bash
         run: |
-          npm run tauri build -- ${{ matrix.args }} > build.log 2>&1 || true
-          grep -v "^dist/" build.log | sed "s/\x1b\[[0-9;]*m//g" | tail -n 25 | sed 's/%/%25/g' | awk 'BEGIN{ORS="%0A"} {print}' > tail.txt
-          echo "::error title=tauri build output::$(cat tail.txt)"
+          mkdir -p out
+          find src-tauri/target -path '*release/bundle/*' \( -name '*.dmg' -o -name '*.msi' -o -name '*-setup.exe' \) -exec cp {} out/ \;
+          # Release asset names cannot contain spaces.
+          for f in out/*; do mv "$f" "out/$(basename "$f" | tr ' ' '-')"; done
+          ls -la out
 
-      - name: Upload installers as workflow artifacts
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: smarttext-ai-${{ matrix.platform }}-${{ matrix.rust_targets || 'x64' }}
-          path: |
-            src-tauri/target/**/release/bundle/dmg/*.dmg
-            src-tauri/target/**/release/bundle/macos/*.app.tar.gz
-            src-tauri/target/**/release/bundle/msi/*.msi
-            src-tauri/target/**/release/bundle/nsis/*.exe
-          if-no-files-found: warn
+          name: smarttext-ai-${{ matrix.artifact }}
+          path: out/*
+          if-no-files-found: error
+
+  release:
+    name: GitHub release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/') || inputs.release_tag != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: installers
+          merge-multiple: true
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.release_tag || github.ref_name }}
+        run: |
+          cat > notes.md <<'EOF'
+          **SmartText AI** — designed and developed by Ismaiel Almarie.
+
+          | Your computer | Download |
+          |---|---|
+          | Mac with Apple Silicon (M1, M2, M3, M4…) | `SmartText-AI_*_aarch64.dmg` |
+          | Mac with Intel processor | `SmartText-AI_*_x64.dmg` |
+          | Windows 10 / 11 (64-bit) | `SmartText-AI_*_x64-setup.exe` (or the `.msi` for IT deployment) |
+
+          These builds are not code-signed. On macOS, right-click the app and choose **Open** the first time
+          (or run `xattr -dr com.apple.quarantine "/Applications/SmartText AI.app"`). On Windows, if SmartScreen
+          appears, choose **More info → Run anyway**. See `INSTALL_GUIDE_AR.pdf` in the repository (Arabic).
+          EOF
+          gh release create "$TAG" installers/* --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "SmartText AI ${TAG#v}" --notes-file notes.md
