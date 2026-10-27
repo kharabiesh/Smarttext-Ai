@@ -70,7 +70,7 @@ jobs:
         shell: bash
         run: |
           npm run tauri build -- ${{ matrix.args }} > build.log 2>&1 || true
-          tail -n 60 build.log | sed 's/%/%25/g' | awk 'BEGIN{ORS="%0A"} {print}' > tail.txt
+          grep -v "^dist/" build.log | sed "s/\x1b\[[0-9;]*m//g" | tail -n 25 | sed 's/%/%25/g' | awk 'BEGIN{ORS="%0A"} {print}' > tail.txt
           echo "::error title=tauri build output::$(cat tail.txt)"
 
       - name: Upload installers as workflow artifacts
